@@ -1,9 +1,9 @@
 
 const express = require('express');
 require('dotenv').config()
-const taskRoutes = require('./routes/task');
-const userRoutes = require('./routes/user');
-const badgeRoutes = require('./routes/badge');
+const taskRoutes = require('./src/routes/task');
+const userRoutes = require('./src/routes/user');
+const badgeRoutes = require('./src/routes/badge');
 
 // express app
 const app = express();
