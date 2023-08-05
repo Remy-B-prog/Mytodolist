@@ -1,12 +1,21 @@
 
 const express = require('express');
+const app = express();
+
 require('dotenv').config()
 const mysql = require('mysql2');
+const cors = require('cors');
 
 // routes import
 const taskRoutes = require('./src/routes/task');
 const userRoutes = require('./src/routes/user');
 const badgeRoutes = require('./src/routes/badge');
+
+app.use(
+    cors({
+        origin: process.env.FRONTEND_URL ?? "http://localhost:3000",
+        optionsSuccessStatus: 200,
+}))
 
 const connection = mysql.createConnection({
     host: process.env.DB_HOST,
@@ -26,8 +35,6 @@ connection.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
 connection.end()
 
 
-// express app
-const app = express();
 
 // middleware
 app.use(express.json());
