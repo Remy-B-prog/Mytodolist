@@ -6,12 +6,12 @@ DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE user(  
     id int NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Primary Key',
-    name VARCHAR(255),
+    firstname VARCHAR(255),
     email VARCHAR(255) UNIQUE,
     hashed_password VARCHAR(255)
 ) COMMENT '';
 
-INSERT INTO `user` VALUES(1,'rémy','fefe@gmail.com','remyb'),(2,'Maxime','Faure@gmail.com','maximef');
+INSERT INTO `user` VALUES(1,'rémy','fefe@gmail.com','$argon2id$v=19$m=65536,t=3,p=1$UfHvadttyf6lLjfnAFBhPQ$6kEukJg4lp8uy2jYa3fyVC9kCKqIClu18YfhkKt+ir8'),(2,'Maxime','Faure@gmail.com','$argon2id$v=19$m=65536,t=3,p=1$amnWVASflI+WCKYLxGJkig$H4bs+7fUd8HhJ9kVcOAmrwXkJonhqrK60t4rVKPweWo');
 
 --
 -- Table structure for table `task_category`
