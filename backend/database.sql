@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE user(  
     id int NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Primary Key',
     name VARCHAR(255),
-    email VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
     hashed_password VARCHAR(255)
 ) COMMENT '';
 
