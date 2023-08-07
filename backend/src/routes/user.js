@@ -1,21 +1,14 @@
 const express = require('express');
+const { getUserByEmailWithPasswordAndPassToNext, verifyPassword, hashPassword  } = require('../middleware/auth');
+const  addUser  = require('../controllers/userControllers');
 
 const router = express.Router();
 
-// get all user
-router.get('/', (req, res) => {
-    res.json({mssg: 'GET all user'})
-})
+// Login as user
+router.post('/login', getUserByEmailWithPasswordAndPassToNext,verifyPassword)
 
-// Get a single user
-router.get('/:id', (req, res) => {
-    res.json({mssg: 'GET a single user'})
-})
-
-// POST a new user
-router.post('/', (req, res) => {
-    res.json({mssg: 'POST a new user'})
-})
+router.post('/register', hashPassword, addUser)
+// router.get('/login', verifyPassword)
 
 // Delete a new user
 router.delete('/:id', (req, res) => {

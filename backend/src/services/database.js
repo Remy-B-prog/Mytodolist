@@ -10,11 +10,18 @@ const database = mysql.createPool({
     database: process.env.DB_NAME
 });
 
-  database
+// const getAllUsersPromise = database.query(`SELECT * FROM user`);
+// console.log(getAllUsers[0])
+
+database
   .getConnection()
   .then(() => {
-    console.log("Can reach database");
+    console.log('Can reach database');
+    // return getAllUsersPromise;
   })
+  // .then((getAllUsersResult) => {
+  //   console.log('Result of getAllUsers:', getAllUsersResult[0]);
+  // })
   .catch((err) => {
     console.error(err);
   });
