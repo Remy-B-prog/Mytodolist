@@ -68,7 +68,32 @@ const verifyPassword = (req, res) => {
         res.sendStatus(500);
       });
   };
+  
+  const verifyToken = (req, res, next) => {
+    try {
+      const authorizationHeader = req.get("Authorization");
+      if (authorizationHeader == null) {
+        throw new Error("Authorization header is missing!");
+      } else {
+        const auth = req.get("authorization").split(" ");
+        const type = auth[0];
+        const token = auth[1];
+  
+        if (type !== "Bearer") {
+          throw new Error("Authorization header has not the 'Bearer' type");
+        } else {
+          req.payload = jwt.verify(token, process.env.JWT_SECRET);
+          console.log('success');
+          next();
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      res.sendStatus(401);
+    }
+  };
   module.exports = {
+    verifyToken,
     getUserByEmailWithPasswordAndPassToNext,
     verifyPassword,
     hashPassword,
