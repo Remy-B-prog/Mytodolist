@@ -9,7 +9,6 @@ const getUserByEmailWithPasswordAndPassToNext = (req, res, next) => {
     .then(([users]) => {
         if (users[0] != null) {
           req.user = users[0];
-          console.log(req.user);
           next();
         } else {
           res.status(401).send("La combinaison Email/Mot de passe est incorrect");
@@ -83,7 +82,6 @@ const verifyPassword = (req, res) => {
           throw new Error("Authorization header has not the 'Bearer' type");
         } else {
           req.payload = jwt.verify(token, process.env.JWT_SECRET);
-          console.log('success');
           next();
         }
       }
