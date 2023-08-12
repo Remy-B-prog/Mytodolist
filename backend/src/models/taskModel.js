@@ -25,7 +25,14 @@ const getAssignedTask = (taskId, userId) => {
   [taskId, userId]);
 }
 
+const deleteAssignedTask = (taskId, userId) => {
+  return database.query(
+` DELETE FROM assigned_task WHERE task_id = ? AND user_id = ?`,
+  [taskId, userId]);
+};
+
 module.exports = {
+  deleteAssignedTask,
   getAllUserAssignedTask,
   postAssigneTask,
   getAssignedTask,
