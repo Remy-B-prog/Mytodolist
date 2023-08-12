@@ -35,4 +35,7 @@ const postUserAssignedTask = (req, res) => {
         });
 }
 
-module.exports = getUserAssignedTask;
+module.exports = {
+    getUserAssignedTask,
+    postUserAssignedTask,
+}
