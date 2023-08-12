@@ -80,6 +80,7 @@ const getAllUserAccomplishTask = (req, res) => {
 }
 
 module.exports = {
+    getAllUserAccomplishTask,
     getUserAssignedTask,
     postUserAssignedTask,
     deletUserAssignedTask,
