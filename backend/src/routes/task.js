@@ -1,6 +1,5 @@
 const express = require('express');
-const {getUserAssignedTask} = require('../controllers/taskControllers');
-const {postUserAssignedTask} = require('../controllers/taskControllers');
+const {deletUserAssignedTask, getUserAssignedTask, postUserAssignedTask } = require('../controllers/taskControllers');
 const router = express.Router();
 
 // get all task
@@ -19,12 +18,10 @@ router.get('/:id', (req, res) => {
 router.post('/assign', postUserAssignedTask )
 
 // Delete a new task
-router.delete('/:id', (req, res) => {
-    res.json({mssg: 'delete a task'})
-})
+router.delete('/:id',deletUserAssignedTask)
 
 // Delete a new task
-router.patch('/:id', (req, res) => {
+router.patch('/assigned-task/:id', (req, res) => {
     res.json({mssg: 'update a task'})
 })
 
