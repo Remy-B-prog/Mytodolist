@@ -9,4 +9,10 @@ const getAllUserAssignedTask = (userId) => {
   [userId]);
 };
 
+const postAssigneTask = (taskId, userId) => {
+  return database.query(
+` INSERT INTO assigned_task (task_id, user_id) VALUES (?, ?)`,
+  [taskId, userId]);
+}
+
 module.exports = getAllUserAssignedTask;
