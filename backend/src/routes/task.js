@@ -2,12 +2,10 @@ const express = require('express');
 const {deletUserAssignedTask, getUserAssignedTask, postUserAssignedTask } = require('../controllers/taskControllers');
 const router = express.Router();
 
-// get all task
-router.get('/', (req, res) => {
-    res.json({mssg: 'GET all task'})
-})
 // get all assigned user tasks
 router.get('/assigned', getUserAssignedTask)
+
+router.get('/accomplished', )
 
 // Get a single task
 router.get('/:id', (req, res) => {
