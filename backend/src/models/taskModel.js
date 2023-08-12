@@ -15,4 +15,18 @@ const postAssigneTask = (taskId, userId) => {
   [taskId, userId]);
 }
 
-module.exports = getAllUserAssignedTask;
+const getAssignedTask = (taskId, userId) => {
+  return database.query(
+` SELECT task.id, task.title, task.description,task.earned_point
+  FROM task
+  INNER JOIN assigned_task AS AT ON AT.task_id = task.id
+  WHERE AT.task_id = ?
+  AND AT.user_id = ?`,
+  [taskId, userId]);
+}
+
+module.exports = {
+  getAllUserAssignedTask,
+  postAssigneTask,
+  getAssignedTask,
+}
