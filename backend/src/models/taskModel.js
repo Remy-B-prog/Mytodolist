@@ -38,6 +38,7 @@ const getAccomplishTask = (taskId, userId) => {
 }
 
 module.exports = {
+  getAccomplishTask,
   deleteAssignedTask,
   getAllUserAssignedTask,
   postAssigneTask,

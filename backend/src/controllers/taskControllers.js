@@ -1,9 +1,5 @@
-const database = require('../services/database');
-const getAllUserAssignedTask = require('../models/taskModel');
-const { postAssigneTask } = require('../models/taskModel');
-const { getUserIdOnToken } = require('../middleware/userMiddleware');
-const { getAssignedTask } = require('../models/taskModel');
-const { deleteAssignedTask } = require('../models/taskModel');
+const { getUserIdOnToken } = require('../middleware/userMiddleware');;
+const {getAccomplishTask, deleteAssignedTask, getAssignedTask, postAssigneTask, getAllUserAssignedTask} = require('../models/taskModel');
 
 // Get all user assigned task
 const getUserAssignedTask = (req, res) => {
@@ -65,6 +61,22 @@ const deletUserAssignedTask = (req, res) => {
             res.status(404).json({ mssg: 'Task not found' })
         }
     })
+}
+
+const getAllUserAccomplishTask = (req, res) => {
+    const token = req.header('Authorization');
+    const userId = getUserIdOnToken(token);
+    getAllUserAccomplishTask(userId)
+        .then(([result]) => {
+            if (result.length > 1) {
+                res.status(200).json(result);
+            } else {
+                res.status(404).json({ mssg: 'No task found' });
+            }
+        })
+        .catch((error) => {
+            res.status(500).json({ mssg: 'Internal server error' });
+        })
 }
 
 module.exports = {
