@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
     res.json({mssg: 'GET all task'})
 })
-
+// get all assigned user tasks
 router.get('/assigned', getUserAssignedTask)
 
 // Get a single task
@@ -15,7 +15,7 @@ router.get('/:id', (req, res) => {
 })
 
 // POST a new task
-router.post('/', (req, res) => {
+router.post('/assign', (req, res) => {
     res.json({mssg: 'POST a new task'})
 })
 
