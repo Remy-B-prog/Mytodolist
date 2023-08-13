@@ -22,7 +22,7 @@ const getUserAssignedTask = (req, res) => {
 const postUserAssignedTask = (req, res) => {
     const token = req.header('Authorization');
     const userId = getUserIdOnToken(token);
-    const taskId = req.body.taskId;
+    const taskId = req.params.id;
     getAssignedTask(taskId, userId)
         .then(([result]) => {
             if (!result[0]) {
@@ -46,7 +46,7 @@ const postUserAssignedTask = (req, res) => {
 const deletUserAssignedTask = (req, res) => {
     const token = req.header('Authorization');
     const userId = getUserIdOnToken(token);
-    const taskId = req.body.taskId;
+    const taskId = req.params.id;
     getAssignedTask(taskId, userId)
     .then(([result]) => {
 
