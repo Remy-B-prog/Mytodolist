@@ -31,10 +31,13 @@ const deleteAssignedTask = (taskId, userId) => {
   [taskId, userId]);
 };
 
-const getAccomplishTask = (taskId, userId) => {
+const getAccomplishTask = (userId) => {
   return database.query(
-    `SELECT task.id, task.title, task.description,task.earned_point WHERE task.id = ? AND user_id = ?`,
-    [taskId, userId]);
+    `SELECT task.id, task.title, task.description,task.earned_point 
+    FROM task
+    INNER JOIN assigned_task AS AT ON AT.task_id = task.id
+    WHERE user_id = ?`,
+    [userId]);
 }
 
 module.exports = {
