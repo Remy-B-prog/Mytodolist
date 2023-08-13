@@ -1,6 +1,6 @@
 const database = require('../services/database');
 
-const getAllBadge = (userId) => {
+const getAllUserBadge = (userId) => {
     return database.query(
         `SELECT * FROM user_badge 
         WHERE user_id = ?`,
@@ -10,5 +10,5 @@ const getAllBadge = (userId) => {
 
 
 module.exports = {
- getAllBadge,
+ getAllUserBadge,
 };
