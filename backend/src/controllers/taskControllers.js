@@ -49,6 +49,7 @@ const deletUserAssignedTask = (req, res) => {
     const taskId = req.body.taskId;
     getAssignedTask(taskId, userId)
     .then(([result]) => {
+
         if(result[0]){
             deleteAssignedTask(taskId, userId).then(([result]) => {
                 if (result['affectedRows'] == 1) {
@@ -66,9 +67,9 @@ const deletUserAssignedTask = (req, res) => {
 const getAllUserAccomplishTask = (req, res) => {
     const token = req.header('Authorization');
     const userId = getUserIdOnToken(token);
-    getAllUserAccomplishTask(userId)
+    getAccomplishTask(userId)
         .then(([result]) => {
-            if (result.length > 1) {
+            if (result[0]) {
                 res.status(200).json(result);
             } else {
                 res.status(404).json({ mssg: 'No task found' });
