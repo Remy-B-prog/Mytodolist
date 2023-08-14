@@ -6,7 +6,6 @@ const getAllUserBadge = (req, res) => {
     const userId = getUserIdOnToken(token);
     getAllBadgeUser(userId)
         .then((result)=>{
-            console.log(result);
             if(result[0]){
                 res.status(200).send(result[0]);
             }else{
