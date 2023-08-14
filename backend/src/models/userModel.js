@@ -11,7 +11,15 @@ const insert = (user) => {
     );
 }
 
+const updateFisrtName = (newFirstname, userId) => {
+  return database.query(
+    `UPDATE user SET firstname = ? WHERE id = ?`,
+    [newFirstname, userId]
+    );
+}
+
 module.exports = {
   getUserByEmail,
   insert,
+  updateFisrtName,
 };
