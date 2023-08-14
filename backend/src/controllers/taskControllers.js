@@ -1,4 +1,4 @@
-const { getUserIdOnToken } = require('../middleware/userMiddleware');;
+const { getUserIdOnToken } = require('../middleware/userMiddleware');
 const { getAccomplishTask,
     deleteAssignedTask,
     getAssignedTask,
