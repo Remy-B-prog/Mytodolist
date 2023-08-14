@@ -2,9 +2,11 @@ const database = require('../services/database');
 
 
 const getOneTaskById = (taskId) => {
-  `SELECT title, description,task_category_id, earned_point 
-  FROM task WHERE id = ?`,
-  [taskId];
+  return database.query(
+    `SELECT title, description,task_category_id, earned_point 
+    FROM task WHERE id = ?`,
+    [taskId]
+  );
 }
 const getAllUserAssignedTask = (userId) => {
   return database.query(
