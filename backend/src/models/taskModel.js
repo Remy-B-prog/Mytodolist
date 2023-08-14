@@ -40,11 +40,22 @@ const getAccomplishTask = (userId) => {
     [userId]);
 }
 
+const getOneAccomplishTask = (userId, taskId) => {
+  return database.query(
+  `SELECT ta.id, ta.title, ta.description, ta.earned_point
+  FROM accomplish_task
+  INNER JOIN task AS ta ON task_id = ta.id
+  WHERE user_id = ?
+  AND task_id = ?`,
+  [taskId, userId]);
+}
+
 const postAccomplishedTask = (taskId, userId) => {
 return database.query(
-  `INSERT INTO accomplished_task (task_id, user_id) VALUES (?, ?)`,
+  `INSERT INTO accomplish_task (task_id, user_id) VALUES (?, ?)`,
  [taskId, userId]);
 };
+
 
 module.exports = {
   getAccomplishTask,
@@ -53,4 +64,5 @@ module.exports = {
   postAssigneTask,
   getAssignedTask,
   postAccomplishedTask,
+  getOneAccomplishTask,
 }
