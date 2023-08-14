@@ -10,5 +10,5 @@ const addUserScoreToCategory = (scoreToAdd, category, user) => {
 }
 
 module.exports = {
-
+addUserScoreToCategory,
 }
