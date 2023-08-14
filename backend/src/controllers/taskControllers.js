@@ -80,6 +80,17 @@ const getAllUserAccomplishTask = (req, res) => {
         })
 }
 
+const addNewAccomplishedTask = (req, res) => {
+    const token = req.header('Authorization');
+    const userId = getUserIdOnToken(token);
+    const taskId = req.params.id;
+    //Add accomplish task
+    //Add score
+    //Check badge by category
+}
+
+
+
 module.exports = {
     getAllUserAccomplishTask,
     getUserAssignedTask,
