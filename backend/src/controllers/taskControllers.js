@@ -1,5 +1,5 @@
 const { getUserIdOnToken } = require('../middleware/userMiddleware');;
-const {getAccomplishTask, deleteAssignedTask, getAssignedTask, postAssigneTask, getAllUserAssignedTask} = require('../models/taskModel');
+const { getAccomplishTask, deleteAssignedTask, getAssignedTask, postAssigneTask, getAllUserAssignedTask } = require('../models/taskModel');
 
 // Get all user assigned task
 const getUserAssignedTask = (req, res) => {
@@ -48,20 +48,20 @@ const deletUserAssignedTask = (req, res) => {
     const userId = getUserIdOnToken(token);
     const taskId = req.params.id;
     getAssignedTask(taskId, userId)
-    .then(([result]) => {
+        .then(([result]) => {
 
-        if(result[0]){
-            deleteAssignedTask(taskId, userId).then(([result]) => {
-                if (result['affectedRows'] == 1) {
-                    res.status(200).json({ mssg: 'Task deleted successfully' });
-                } else {
-                    res.status(500).json({ mssg: 'Internal server error' });
-                }
-            });
-        }else{
-            res.status(404).json({ mssg: 'Task not found' })
-        }
-    })
+            if (result[0]) {
+                deleteAssignedTask(taskId, userId).then(([result]) => {
+                    if (result['affectedRows'] == 1) {
+                        res.status(200).json({ mssg: 'Task deleted successfully' });
+                    } else {
+                        res.status(500).json({ mssg: 'Internal server error' });
+                    }
+                });
+            } else {
+                res.status(404).json({ mssg: 'Task not found' })
+            }
+        })
 }
 
 const getAllUserAccomplishTask = (req, res) => {
@@ -80,11 +80,18 @@ const getAllUserAccomplishTask = (req, res) => {
         })
 }
 
-const addNewAccomplishedTask = (req, res) => {
+const postUserValidateTask = (req, res) => {
     const token = req.header('Authorization');
     const userId = getUserIdOnToken(token);
     const taskId = req.params.id;
-    //Add accomplish task
+    postAccomplishedTask(taskId, userId)
+        .then(([result]) => {
+            if(result.success) {
+                res.status(200).json({ mssg: 'Task validated successfully' });
+            } else {
+                res.status(500).json({ mssg: 'Internal server error' });
+            }
+        })
     //Add score
     //Check badge by category
 }
