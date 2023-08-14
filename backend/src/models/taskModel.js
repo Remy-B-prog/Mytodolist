@@ -40,10 +40,17 @@ const getAccomplishTask = (userId) => {
     [userId]);
 }
 
+const postAccomplishedTask = (taskId, userId) => {
+return database.query(
+  `INSERT INTO accomplished_task (task_id, user_id) VALUES (?, ?)`,
+ [taskId, userId]);
+};
+
 module.exports = {
   getAccomplishTask,
   deleteAssignedTask,
   getAllUserAssignedTask,
   postAssigneTask,
   getAssignedTask,
+  postAccomplishedTask,
 }
