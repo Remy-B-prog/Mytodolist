@@ -5,6 +5,7 @@ const router = express.Router();
 // get all assigned user tasks
 router.get('/assigned', getUserAssignedTask)
 
+// get all assigned tasks
 router.get('/accomplished', getAllUserAccomplishTask )
 
 // POST a new task
