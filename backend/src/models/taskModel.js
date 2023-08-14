@@ -40,14 +40,14 @@ const getAccomplishTask = (userId) => {
     [userId]);
 }
 
-const getOneAccomplishTask = (userId, taskId) => {
+const getOneAccomplishTask = (taskId, userId) => {
   return database.query(
   `SELECT ta.id, ta.title, ta.description, ta.earned_point
   FROM accomplish_task
   INNER JOIN task AS ta ON task_id = ta.id
   WHERE user_id = ?
   AND task_id = ?`,
-  [taskId, userId]);
+  [userId, taskId ]);
 }
 
 const postAccomplishedTask = (taskId, userId) => {
