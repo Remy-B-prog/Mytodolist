@@ -143,7 +143,6 @@ CREATE TABLE user_badge(
 INSERT into user_badge VALUES 
 (1,1,1),
 (2,2,1),
-(3,1,1),
 (4,2,2),
 (5,4,1),
 (6,5,1),
