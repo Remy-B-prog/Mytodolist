@@ -4,9 +4,7 @@ const database = require('../services/database');
 
 const addUser = (req, res) => {
   const user = req.body;
-  console.log(req.body);
   // TODO validations (length, format...)
-
     insert(user)
     .then(([result]) => {
       res.location(`/users/${result.insertId}`).sendStatus(201);
