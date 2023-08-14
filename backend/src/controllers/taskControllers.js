@@ -1,5 +1,5 @@
 const { getUserIdOnToken } = require('../middleware/userMiddleware');;
-const { getAccomplishTask, deleteAssignedTask, getAssignedTask, postAssigneTask, getAllUserAssignedTask } = require('../models/taskModel');
+const { getAccomplishTask, deleteAssignedTask, getAssignedTask, postAssigneTask, getAllUserAssignedTask, postAccomplishedTask, getOneAccomplishTask } = require('../models/taskModel');
 
 // Get all user assigned task
 const getUserAssignedTask = (req, res) => {
@@ -34,13 +34,11 @@ const postUserAssignedTask = (req, res) => {
                             res.status(500).json({ mssg: 'Internal server error' });
                         }
                     });
-
             } else {
                 res.status(400).json({ mssg: 'Task already assigned' });
             }
         });
 }
-
 // Delete an assigned task
 
 const deletUserAssignedTask = (req, res) => {
@@ -84,12 +82,20 @@ const postUserValidateTask = (req, res) => {
     const token = req.header('Authorization');
     const userId = getUserIdOnToken(token);
     const taskId = req.params.id;
-    postAccomplishedTask(taskId, userId)
+    getOneAccomplishTask(taskId, userId)
         .then(([result]) => {
-            if(result.success) {
-                res.status(200).json({ mssg: 'Task validated successfully' });
+            if (!result[0]) {
+                console.log('here');
+                postAccomplishedTask(taskId, userId)
+                    .then(([result]) => {
+                        if (result.affectedRows) {
+                            res.status(200).json({ mssg: 'Task validated successfully' });
+                        } else {
+                            res.status(500).json({ mssg: 'Internal server error' });
+                        }
+                    })
             } else {
-                res.status(500).json({ mssg: 'Internal server error' });
+                res.status(400).json({ mssg: 'Task already validated' });
             }
         })
     //Add score
@@ -103,4 +109,5 @@ module.exports = {
     getUserAssignedTask,
     postUserAssignedTask,
     deletUserAssignedTask,
+    postUserValidateTask,
 }
