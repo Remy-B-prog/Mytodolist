@@ -7,8 +7,8 @@ const router = express.Router();
 // Login as user
 router.post('/login', getUserByEmailWithPasswordAndPassToNext,verifyPassword)
 
-router.post('/register', hashPassword, addUser)
 // router.get('/login', verifyPassword)
+router.post('/register', hashPassword, addUser)
 
 
 module.exports = router
