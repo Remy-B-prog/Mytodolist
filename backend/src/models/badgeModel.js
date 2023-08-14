@@ -11,7 +11,18 @@ const getAllBadgeUser = (userId) => {
     )
 }
 
+const getAllCategoryBadge = (categoryId) => {
+    return database.query(
+        `SELECT b.title, b.critical_score, tc.category
+         FROM badge AS b 
+         INNER JOIN task_category AS tc ON b.task_category_id = tc.id
+         WHERE tc.id = ?`,
+         [categoryId],
+    )
+}
+
 
 module.exports = {
     getAllBadgeUser,
+    getAllCategoryBadge,
 };
