@@ -34,7 +34,7 @@ const getAllCategoryBadge = (categoryId) => {
 
 const insertEarnedBadge = (badgeId, userId) => {
     return database.query(`
-    INSERT INTO user_badge (badge_id, user_id)`
+    INSERT INTO user_badge (badge_id, user_id) VALUES (?, ?)`,
     [badgeId, userId]);
     
 }
