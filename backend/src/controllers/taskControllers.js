@@ -1,5 +1,12 @@
 const { getUserIdOnToken } = require('../middleware/userMiddleware');;
-const { getAccomplishTask, deleteAssignedTask, getAssignedTask, postAssigneTask, getAllUserAssignedTask, postAccomplishedTask, getOneAccomplishTask } = require('../models/taskModel');
+const { getAccomplishTask,
+    deleteAssignedTask,
+    getAssignedTask,
+    postAssigneTask,
+    getAllUserAssignedTask,
+    postAccomplishedTask,
+    getOneAccomplishTask,} = require('../models/taskModel');
+const {addUserScoreToCategoryUtils} = require('../utils/utils');
 
 // Get all user assigned task
 const getUserAssignedTask = (req, res) => {
@@ -85,10 +92,10 @@ const postUserValidateTask = (req, res) => {
     getOneAccomplishTask(taskId, userId)
         .then(([result]) => {
             if (!result[0]) {
-                console.log('here');
                 postAccomplishedTask(taskId, userId)
                     .then(([result]) => {
                         if (result.affectedRows) {
+                            addUserScoreToCategoryUtils(taskId, userId);
                             res.status(200).json({ mssg: 'Task validated successfully' });
                         } else {
                             res.status(500).json({ mssg: 'Internal server error' });
