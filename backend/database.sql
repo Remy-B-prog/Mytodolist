@@ -147,7 +147,8 @@ INSERT into user_badge VALUES
 (5,4,1),
 (6,5,1),
 (7,4,2),
-(8,6,2);
+(8,6,2),
+(9,3,1);
 
 -- Rémy taches ménagère 335 admin 135
 -- Maxime taches ménagère 260 admin 190
