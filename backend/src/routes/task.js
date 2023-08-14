@@ -2,6 +2,7 @@ const express = require('express');
 const { deletUserAssignedTask, getUserAssignedTask, postUserAssignedTask, getAllUserAccomplishTask, postUserValidateTask } = require('../controllers/taskControllers');
 const router = express.Router();
 
+
 // get all assigned user tasks
 router.get('/assigned', getUserAssignedTask)
 
