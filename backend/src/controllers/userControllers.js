@@ -1,6 +1,6 @@
-const model = require('express');
-const {insert} = require('../models/userModel');
-const database = require('../services/database');
+
+const {insert, updateFisrtName} = require('../models/userModel');
+const { getUserIdOnToken } = require('../middleware/userMiddleware');
 
 const addUser = (req, res) => {
   const user = req.body;
@@ -15,4 +15,24 @@ const addUser = (req, res) => {
     });
 };
 
-module.exports = addUser;
+const userUpdateHisFirstName = (req, res) => {
+  const newFirstname = req.body.newFirstName;
+  const token = req.header('Authorization');
+  const userId = getUserIdOnToken(token);
+  // TODO validations (length, format...)
+    updateFisrtName(newFirstname, userId)
+    .then(([result]) => {
+      res.location(`/users/${result.insertId}`).sendStatus(201);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Erreur lors de la mise à jour du prénom");
+    });
+}
+
+
+
+module.exports = {
+  addUser,
+  userUpdateHisFirstName,
+}
