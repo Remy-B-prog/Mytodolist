@@ -6,7 +6,7 @@ const { getAccomplishTask,
     getAllUserAssignedTask,
     postAccomplishedTask,
     getOneAccomplishTask,} = require('../models/taskModel');
-const {addUserScoreToCategoryUtils} = require('../utils/utils');
+const {addUserScoreToCategoryUtils, checkIfUserEarnedBadge} = require('../utils/utils');
 
 // Get all user assigned task
 const getUserAssignedTask = (req, res) => {
@@ -96,6 +96,7 @@ const postUserValidateTask = (req, res) => {
                     .then(([result]) => {
                         if (result.affectedRows) {
                             addUserScoreToCategoryUtils(taskId, userId);
+                            checkIfUserEarnedBadge(taskId, userId);
                             res.status(200).json({ mssg: 'Task validated successfully' });
                         } else {
                             res.status(500).json({ mssg: 'Internal server error' });
@@ -105,6 +106,9 @@ const postUserValidateTask = (req, res) => {
                 res.status(400).json({ mssg: 'Task already validated' });
             }
         })
+        .catch((error) => {
+            res.status(500).json({ mssg: 'Internal server error' });
+        });
     //Add score
     //Check badge by category
 }
