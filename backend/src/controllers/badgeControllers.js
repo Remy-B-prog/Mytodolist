@@ -8,7 +8,7 @@ const getAllUserBadge = (req, res) => {
         .then((result)=>{
             console.log(result);
             if(result[0]){
-                res.status(200).send(result);
+                res.status(200).send(result[0]);
             }else{
                 res.status(404).send("no badge found");
             }
