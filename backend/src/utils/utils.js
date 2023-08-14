@@ -13,9 +13,8 @@ const addUserScoreToCategoryUtils = (taskId, userId) => {
         })
 }
 
-const checkIfUserEarnedBadge = (taskId, userId) => {
-
-    getOneTaskById(taskId)
+const checkIfUserEarnedBadge = (taskAcomplishByUser, userId) => {
+    getOneTaskById(taskAcomplishByUser)
         .then(([result]) => {
             const categoryId = result[0].task_category_id;
             getAllCategoryBadge(categoryId)
@@ -29,8 +28,9 @@ const checkIfUserEarnedBadge = (taskId, userId) => {
                                 .then(([result]) => {
                                     const userScore = result[0].score;
                                     const badgeEarned = BadgesNotEarned.filter(badge => userScore >= badge.critical_score);
-                                    if(badgeEarned){
-                                        insertEarnedBadge(badgeEarned[0].id, userId);
+                                    if(badgeEarned[0]){
+                                        const badgeId = badgeEarned[0].id;
+                                        insertEarnedBadge(badgeId, userId);
                                     }
                                 })
                         });
@@ -38,16 +38,7 @@ const checkIfUserEarnedBadge = (taskId, userId) => {
         });
 }
 
-checkIfUserEarnedBadge(1, 1)
-
-//récupère tout les badges de la category //
-//récupère tout les badges que l'user possède dans cette category//
-//soustrait les badges de la category - les badges de user//
-//regarde dans les badges de la category restant si le score de l'user est supérieur au score d'un badge
-//si un score est superieur alors on ajoute le badge à l'user
-
-
-
 module.exports = {
     addUserScoreToCategoryUtils,
+    checkIfUserEarnedBadge,
 }
