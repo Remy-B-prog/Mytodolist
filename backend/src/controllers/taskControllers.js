@@ -54,7 +54,6 @@ const deletUserAssignedTask = (req, res) => {
     const taskId = req.params.id;
     getAssignedTask(taskId, userId)
         .then(([result]) => {
-
             if (result[0]) {
                 deleteAssignedTask(taskId, userId).then(([result]) => {
                     if (result['affectedRows'] == 1) {
@@ -66,6 +65,9 @@ const deletUserAssignedTask = (req, res) => {
             } else {
                 res.status(404).json({ mssg: 'Task not found' })
             }
+        })
+        .catch((error) => {
+            res.status(500).json({ mssg: 'Internal server error' });
         })
 }
 
