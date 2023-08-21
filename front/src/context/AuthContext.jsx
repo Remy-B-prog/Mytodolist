@@ -9,6 +9,7 @@ export function AuthContextProvider({ children }) {
   
     const setUserTokenCookie = (token) => {
       if (token) {
+        // Set the expiration date to 1 minute from now
         const expirationDate = new Date();
         expirationDate.setMinutes(expirationDate.getMinutes() + 1440);
         Cookies.set("userToken", token, {
@@ -23,16 +24,12 @@ export function AuthContextProvider({ children }) {
   
     const value = useMemo(
       () => ({
-        checkBoxFilter,
-        setCheckBoxFilter,
         setUserTokenCookie,
         userToken,
         userInfos,
         setUserInfos,
-        userJourney,
-        setUserJourney,
       }),
-      [userToken, userInfos, checkBoxFilter, userJourney]
+      [userToken, userInfos]
     );
   
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
