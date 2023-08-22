@@ -14,7 +14,9 @@ function App() {
   return (
     <>
       <Router>
+        <div className='flex justify-center'>
         <Routes/>
+        </div>
       </Router>
     </>
   )

@@ -4,20 +4,23 @@ import { useNavigate } from 'react-router-dom';
 export default function Button({ text, redirection }) {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const handleClick = () => {
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
       navigate(redirection);
-    };
-    const buttonElement = document.querySelector('.rounded');
-    buttonElement.addEventListener('click', handleClick);
-    return () => {
-      buttonElement.removeEventListener('click', handleClick);
-    };
-  }, [navigate, redirection]);
+    }
+  };
 
   return (
-    <div className='rounded w-60 bg-red h-14'>
-      <p>{text}</p>
-    </div>
+    <>
+      <div
+        className='rounded-lg h-14 md:h-20 bg-green hover:bg-greenfocus hover:cursor-pointer hover:outline-green-focus focus:outline focus:outline-green focus:outline-4 flex items-center justify-center text-2xl listener shadow-lg '
+        onClick={() => navigate(redirection)}
+        onKeyDown={handleKeyDown} 
+        tabIndex={0}    
+        role='button'
+      >
+        <p className='font-inika'>{text}</p>
+      </div>    
+    </>
   );
 }
