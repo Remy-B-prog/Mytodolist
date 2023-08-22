@@ -6,10 +6,21 @@
 @tailwind utilities;
 
 
+html {
+    font-family: 'Inika', serif;;
+}
+
+input {
+    font-family: 'Inika', serif;
+}
+
+input::placeholder {
+    font-family: 'Inika', serif;
+    color: rgb(80, 77, 77);
+}
 
 h1 {
     font-size: 2.25rem;
-    font-family: 'Inika', serif;
     font-weight: 700;
 }
 
@@ -20,7 +31,6 @@ h1 {
 }
 
 p{
-    font-family: 'Inika', serif;
     text-align: justify;
 }
 

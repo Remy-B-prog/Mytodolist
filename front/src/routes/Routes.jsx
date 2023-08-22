@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext} from 'react'
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from '../pages/Home'
 import Login from '../pages/Login'
@@ -6,12 +6,14 @@ import Register from '../pages/Register'
 import Task from '../pages/Task'
 import Dashboard from '../pages/Dashboard'
 import Rewards from '../pages/Rewards'
+import { AuthContext } from "../context/AuthContext";
 
 export default function routes() {
-  const token = false;
+  const { userToken } = useContext(AuthContext);
+  console.log(userToken);
 
   const PrivateRoute = ({ element, path }) => {
-    if (token) {
+    if (userToken) {
       return element;
     } else {
       return <Navigate to="/" replace />;
