@@ -4,6 +4,7 @@ const { getUserIdOnToken } = require('../middleware/userMiddleware');
 
 const addUser = (req, res) => {
   const user = req.body;
+  console.log(req.body);
   // TODO validations (length, format...)
     insert(user)
     .then(([result]) => {
