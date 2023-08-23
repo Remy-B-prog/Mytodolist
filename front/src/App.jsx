@@ -9,7 +9,7 @@ import { AuthContext } from "./context/AuthContext";
 
 function App() {
   const { VITE_BACKEND_URL } = import.meta.env;
-  const { setUserInfos, setUserJourney } = useContext(AuthContext);
+  const { setUserInfos } = useContext(AuthContext);
 
   return (
     <>
