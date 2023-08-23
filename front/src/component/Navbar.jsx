@@ -5,7 +5,6 @@ import { AuthContext } from "../context/AuthContext";
 export default function Navbar() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const { userInfos } = useContext(AuthContext);
-  console.log(userInfos)
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -36,7 +35,7 @@ export default function Navbar() {
           <Link to="/tableau-de-bord">
             <div className='flex flex-col items-center ms-2'>
             <img src="/image/login.svg" alt="Logo" className="w-10 h-10 cursor-pointer" />
-            <p className='text-base' >{userInfos.userFirstName}</p>
+            <p className='text-base' >Rémy</p>
             </div>
           </Link>
           <Link to="/taches">

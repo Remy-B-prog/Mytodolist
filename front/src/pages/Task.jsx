@@ -1,11 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect} from 'react';
 import Navbar from '../component/Navbar';
-import { AuthContext } from "../context/AuthContext";
 
 export default function Task() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  console.log(userInfos);
 
   useEffect(() => {
     const handleResize = () => {
