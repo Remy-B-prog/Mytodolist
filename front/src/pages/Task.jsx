@@ -3,11 +3,14 @@ import Navbar from '../component/Navbar';
 import axios from 'axios';
 import TaskCard from '../component/TaskCard';
 import Title from '../component/Title';
-
+import TaskModal from '../component/TaskModal'
+import TaskViewDesktop from '../component/TaskViewDesktop';
 export default function Task() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [assignedTask, setAssignedTask] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [modal, setModal] = useState(false);
+  const [modaltaskId, setModaltaskId] = useState('');
 
   useEffect(() => {
     const handleResize = () => {
@@ -25,8 +28,8 @@ export default function Task() {
     axios
       .get('/api/task/assigned')
       .then((res) => {
-        console.log(res);
         setAssignedTask(res.data)
+        setModaltaskId(res.data[0].id)
         setIsLoading(false);
       })
       .catch((err) => {
@@ -39,6 +42,7 @@ export default function Task() {
 
   return (
     <>
+<TaskModal modal ={modal} setModal={setModal} id={modaltaskId} taskList={[assignedTask]} /> 
       <div className="flex flex-col min-h-screen w-full">
         {isMobile ? (
           <>
@@ -46,13 +50,13 @@ export default function Task() {
             <Title title={"Taches"} />
             <main
               className='flex-grow overflow-y-auto overflow-hidden mb-32 md:flex md:items-center '
-
-            >
+              
+              >
               {isLoading ? <div>chargement...</div> :
                 <div className='md:flex md:flex-wrap md:gap-5 md:justify-center'>
                   {assignedTask.map((e) =>
                     <div className='pt-5'>
-                      <TaskCard key={e.id} title={e.title} point={e.earned_point} type={e.category} />
+                      <TaskCard key={e.id} id={e.id} title={e.title} point={e.earned_point} type={e.category} setModal={setModal} setModaltaskId={setModaltaskId}/>
                     </div>
                   )}
 
@@ -64,16 +68,20 @@ export default function Task() {
           <>
             <Navbar />
             <main className="flex-grow overflow-y-auto w-full mt-32">
+            <div>
+                </div>
               {isLoading ? <div>chargement...</div> :
               <div className='flex h-full'>
                 <div className='w-1/2 h-full flex items-center'>
                   <div className='flex flex-wrap gap-10 justify-center'>
                   {assignedTask.map((e) =>
-                    <TaskCard key={e.id} title={e.title} point={e.earned_point} type ={e.category} />
+                      <TaskCard key={e.id} id={e.id} title={e.title} point={e.earned_point} type={e.category} setModal={setModal} setModaltaskId={setModaltaskId}/>
                   )}
                   </div>
                 </div>
-                <div className='w-1/2'>modal</div>
+                <div className='w-1/2'>
+                  <TaskViewDesktop id={modaltaskId} taskList={[assignedTask]} />
+                </div>
                 </div>
                 }
                 

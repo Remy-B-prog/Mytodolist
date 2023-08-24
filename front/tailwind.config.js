@@ -6,6 +6,7 @@ export default {
   ],
   theme: {
     colors: {
+      'black': '#000000',
       'white': "#FFFFFF",
       'green': "#B0DEE1",
       'greenfocus': "#65ABAF",
