@@ -10,9 +10,10 @@ const getOneTaskById = (taskId) => {
 }
 const getAllUserAssignedTask = (userId) => {
   return database.query(
-` SELECT task.id, task.title, task.description,task.earned_point
+` SELECT task.id, task.title, task.description,task.earned_point, c.category
   FROM task
   INNER JOIN assigned_task AS AT ON AT.task_id = task.id
+  INNER JOIN task_category AS c ON task.task_category_id = c.id
   WHERE AT.user_id = ?`,
   [userId]);
 };

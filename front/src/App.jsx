@@ -8,8 +8,12 @@ import Cookies from "js-cookie";
 import { AuthContext } from "./context/AuthContext";
 
 function App() {
-  const { VITE_BACKEND_URL } = import.meta.env;
+  const backUrl = import.meta.env.VITE_BACKEND_URL;
   const { setUserInfos } = useContext(AuthContext);
+  axios.defaults.baseURL = backUrl;
+  axios.defaults.headers.common.Authorization = `Bearer ${Cookies.get(
+    "userToken"
+  )}`;
 
   return (
     <>

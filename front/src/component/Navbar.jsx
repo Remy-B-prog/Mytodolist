@@ -2,7 +2,7 @@ import React, { useState, useEffect,useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from "../context/AuthContext";
 
-export default function Navbar() {
+export default function Navbar({linkLeft, logoLeft, linkRight, logoRight }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const { userInfos } = useContext(AuthContext);
   useEffect(() => {
@@ -20,14 +20,18 @@ export default function Navbar() {
   const isMobile = windowWidth <= 1024;
 
   return (
-    <nav className={`w-full flex justify-between items-center mb-5 ps-5 pe-5 pt-3.5 border-t-2 border-grey lg:border-t-0 lg:border-b-2 lg:pb-3.5 ${isMobile ? 'mobile-navbar' : 'desktop-navbar'}`}>
+    <nav
+    className={`w-full flex justify-between items-center ps-5 pe-5 pt-3.5 pb-3.5 border-t-2 border-grey lg:border-t-0 lg:border-b-2 ${
+      isMobile ? 'fixed bottom-0 left-0 right-0 bg-white z-50' : 'fixed top-0 left-0 right-0 bg-white z-50'
+    }`}
+  >
       {isMobile ? (
         <>
-          <Link to="/tableau-de-bord">
-            <img src="/image/login.svg" alt="Logo" className="w-20 h-20 cursor-pointer" />
+          <Link to={linkLeft}>
+            <img src={logoLeft} alt="Logo" className="w-20 h-20 cursor-pointer" />
           </Link>
-          <Link to="/recompense">
-            <img src="/image/add.svg" alt="Logo" className="w-20 h-20 cursor-pointer" />
+          <Link to={linkRight}>
+            <img src={logoRight} alt="Logo" className="w-20 h-20 cursor-pointer" />
           </Link>
         </>
       ) : (
