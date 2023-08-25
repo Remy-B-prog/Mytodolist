@@ -9,6 +9,9 @@ router.get('/assigned', getUserAssignedTask)
 // get all accomplished tasks
 router.get('/accomplished', getAllUserAccomplishTask )
 
+// get all accomplished tasks
+router.get('/addTask' )
+
 // POST a new task
 router.post('/assign/:id', postUserAssignedTask )
 
