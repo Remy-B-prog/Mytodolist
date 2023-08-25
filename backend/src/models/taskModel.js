@@ -1,5 +1,15 @@
 const database = require('../services/database');
 
+const getAllTask = () => {
+  return database.query(
+    `SELECT T.id, T.title, T.description, T.earned_point, TC.category
+    FROM task AS T
+    INNER JOIN task_category AS TC ON T.task_category_id = TC.id;
+   `
+   
+   );
+}
+
 
 const getOneTaskById = (taskId) => {
   return database.query(
