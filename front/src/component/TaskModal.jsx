@@ -1,10 +1,24 @@
 import React from 'react'
 import Title from './Title'
+import axios from 'axios'
 
-export default function TaskModal({ modal, setModal, id, taskList }) {
+export default function TaskModal({ modal, setModal, id, taskList, setAssignedTask, assignedTask }) {
     const handleClick = () => {
         setModal(false);
     }
+
+    const handlValidateTask = (e) => {
+        axios
+        .post(`/api/task/validate-task/${id}`)
+        .then((response) => {
+            setAssignedTask(assignedTask.filter(task => task.id !== id))
+            setModal(false);
+          })
+        .catch((error) => {
+          console.error(error);
+        })
+    }
+
     const filteredTask = taskList[0].filter(task => task.id === id)[0];
     if (modal && window.innerWidth <= 1024) {
         return (
@@ -22,7 +36,8 @@ export default function TaskModal({ modal, setModal, id, taskList }) {
                         <div className='ms-5 me-5 mt-5 overflow-hidden max-h-60 overflow-y-auto overflow-hidden'>
                             <p className='text-lg md:text-2xl w-full text-center'>{filteredTask.description}</p>
                         </div>
-                        <button className={`flex justify-around items-center h-20 ps-5 pe-5 w-full rounded-bl-lg rounded-br-lg ${filteredTask.category === 'Taches ménagère' ? "bg-yellowflash" : "bg-pinkflash"}`}>
+                        <button className={`flex justify-around items-center h-20 ps-5 pe-5 w-full rounded-bl-lg rounded-br-lg ${filteredTask.category === 'Taches ménagère' ? "bg-yellowflash" : "bg-pinkflash"}`}
+                        onClick={handlValidateTask}>
                             <img src="/image/validation.svg" alt="validation" className='w-10 h-10'/>
                             <p className='text-2xl'>{filteredTask.earned_point} pts</p>
                         </button>

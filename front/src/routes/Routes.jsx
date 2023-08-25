@@ -37,6 +37,10 @@ export default function routes() {
           path="/recompense"
           element={<PrivateRoute element={<Rewards />} />}
         />
+                <Route
+          path="/add"
+          element={<PrivateRoute element={<Rewards />} />}
+        />
       </Routes>
     </>
   )

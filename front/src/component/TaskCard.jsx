@@ -15,7 +15,6 @@ export default function TaskCard({ id, title, point, type, setModal, setModaltas
         axios
         .post(`/api/task/validate-task/${id}`)
         .then((response) => {
-            console.log(response);
             setAssignedTask(assignedTask.filter(task => task.id !== id))
           })
         .catch((error) => {
