@@ -1,5 +1,5 @@
 const express = require('express');
-const { deletUserAssignedTask, getUserAssignedTask, postUserAssignedTask, getAllUserAccomplishTask, postUserValidateTask } = require('../controllers/taskControllers');
+const { deletUserAssignedTask, getUserAssignedTask, postUserAssignedTask, getAllUserAccomplishTask, postUserValidateTask, allTaskDiffAssignedTask } = require('../controllers/taskControllers');
 const router = express.Router();
 
 
@@ -10,7 +10,7 @@ router.get('/assigned', getUserAssignedTask)
 router.get('/accomplished', getAllUserAccomplishTask )
 
 // get all accomplished tasks
-router.get('/addTask' )
+router.get('/addtask',allTaskDiffAssignedTask )
 
 // POST a new task
 router.post('/assign/:id', postUserAssignedTask )

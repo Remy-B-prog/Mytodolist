@@ -5,7 +5,8 @@ const { getAccomplishTask,
     postAssigneTask,
     getAllUserAssignedTask,
     postAccomplishedTask,
-    getOneAccomplishTask, } = require('../models/taskModel');
+    getOneAccomplishTask, 
+    getAllTask,} = require('../models/taskModel');
 const { addUserScoreToCategoryUtils, checkIfUserEarnedBadge } = require('../utils/utils');
 
 // Get all user assigned task
@@ -117,6 +118,30 @@ const postUserValidateTask = (req, res) => {
     //Check badge by category
 }
 
+const allTaskDiffAssignedTask = (req, res) => {
+    const token = req.header('Authorization');
+    const userId = getUserIdOnToken(token);
+    getAllTask()
+        .then(([result]) => {
+            if (result[0]) {
+                const allTask = result;
+                getAllUserAssignedTask(userId)
+                .then(([result]) => {
+                    const userAssignedTask = result;
+                    const userTaskDiffAssignedTask = allTask.filter((task) => task.id !== userAssignedTask.id);
+                    res.status(200).json(userTaskDiffAssignedTask);
+                });
+            } else {
+                res.status(400).json({ mssg: 'error' });
+            }
+        })
+        .catch((error) => {
+            res.status(500).json({ mssg: 'Internal server error' });
+        });
+    //Add score
+    //Check badge by category
+}
+
 
 
 module.exports = {
@@ -125,4 +150,5 @@ module.exports = {
     postUserAssignedTask,
     deletUserAssignedTask,
     postUserValidateTask,
+    allTaskDiffAssignedTask,
 }

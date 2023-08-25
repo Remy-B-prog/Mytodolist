@@ -6,7 +6,7 @@ const getAllTask = () => {
     FROM task AS T
     INNER JOIN task_category AS TC ON T.task_category_id = TC.id;
    `
-   
+
    );
 }
 
@@ -85,4 +85,5 @@ module.exports = {
   postAccomplishedTask,
   getOneAccomplishTask,
   getOneTaskById,
+  getAllTask,
 }
