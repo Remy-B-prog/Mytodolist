@@ -5,8 +5,8 @@ const { getAccomplishTask,
     postAssigneTask,
     getAllUserAssignedTask,
     postAccomplishedTask,
-    getOneAccomplishTask,} = require('../models/taskModel');
-const {addUserScoreToCategoryUtils, checkIfUserEarnedBadge} = require('../utils/utils');
+    getOneAccomplishTask, } = require('../models/taskModel');
+const { addUserScoreToCategoryUtils, checkIfUserEarnedBadge } = require('../utils/utils');
 
 // Get all user assigned task
 const getUserAssignedTask = (req, res) => {
@@ -55,13 +55,14 @@ const deletUserAssignedTask = (req, res) => {
     getAssignedTask(taskId, userId)
         .then(([result]) => {
             if (result[0]) {
-                deleteAssignedTask(taskId, userId).then(([result]) => {
-                    if (result['affectedRows'] == 1) {
-                        res.status(200).json({ mssg: 'Task deleted successfully' });
-                    } else {
-                        res.status(500).json({ mssg: 'Internal server error' });
-                    }
-                });
+                deleteAssignedTask(taskId, userId)
+                    .then(([result]) => {
+                        if (result['affectedRows'] == 1) {
+                            res.status(200).json({ mssg: 'Task deleted successfully' });
+                        } else {
+                            res.status(500).json({ mssg: 'Internal server error' });
+                        }
+                    });
             } else {
                 res.status(404).json({ mssg: 'Task not found' })
             }
@@ -97,6 +98,7 @@ const postUserValidateTask = (req, res) => {
                 postAccomplishedTask(taskId, userId)
                     .then(([result]) => {
                         if (result.affectedRows) {
+                            deleteAssignedTask(taskId, userId);
                             addUserScoreToCategoryUtils(taskId, userId);
                             checkIfUserEarnedBadge(taskId, userId);
                             res.status(200).json({ mssg: 'Task validated successfully' });
