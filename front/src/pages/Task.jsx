@@ -56,7 +56,7 @@ export default function Task() {
                 <div className='md:flex md:flex-wrap md:gap-5 md:justify-center'>
                   {assignedTask.map((e) =>
                     <div className='pt-5'>
-                      <TaskCard key={e.id} id={e.id} title={e.title} point={e.earned_point} type={e.category} setModal={setModal} setModaltaskId={setModaltaskId}/>
+                      <TaskCard key={e.id} id={e.id} title={e.title} point={e.earned_point} type={e.category} setModal={setModal} setModaltaskId={setModaltaskId} assignedTask={assignedTask} setAssignedTask={setAssignedTask}/>
                     </div>
                   )}
 
@@ -75,7 +75,7 @@ export default function Task() {
                 <div className='w-1/2 h-full flex items-center'>
                   <div className='flex flex-wrap gap-10 justify-center'>
                   {assignedTask.map((e) =>
-                      <TaskCard key={e.id} id={e.id} title={e.title} point={e.earned_point} type={e.category} setModal={setModal} setModaltaskId={setModaltaskId}/>
+                      <TaskCard key={e.id} id={e.id} title={e.title} point={e.earned_point} type={e.category} setModal={setModal} setModaltaskId={setModaltaskId} assignedTask={assignedTask} setAssignedTask={setAssignedTask}/>
                   )}
                   </div>
                 </div>
