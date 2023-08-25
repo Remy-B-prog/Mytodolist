@@ -128,7 +128,9 @@ const allTaskDiffAssignedTask = (req, res) => {
                 getAllUserAssignedTask(userId)
                 .then(([result]) => {
                     const userAssignedTask = result;
-                    const userTaskDiffAssignedTask = allTask.filter((task) => task.id !== userAssignedTask.id);
+                    console.log(userAssignedTask);
+                    console.log(userAssignedTask.id);
+                    const userTaskDiffAssignedTask = allTask.filter(task => !userAssignedTask.some(userAssignedTask => userAssignedTask.id === task.id));
                     res.status(200).json(userTaskDiffAssignedTask);
                 });
             } else {
