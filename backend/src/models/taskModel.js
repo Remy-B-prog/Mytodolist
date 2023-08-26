@@ -18,6 +18,8 @@ const getOneTaskById = (taskId) => {
     [taskId]
   );
 }
+
+
 const getAllUserAssignedTask = (userId) => {
   return database.query(
 ` SELECT task.id, task.title, task.description,task.earned_point, c.category
@@ -52,10 +54,10 @@ const deleteAssignedTask = (taskId, userId) => {
 
 const getAccomplishTask = (userId) => {
   return database.query(
-    `SELECT task.id, task.title, task.description,task.earned_point 
-    FROM task
-    INNER JOIN assigned_task AS AT ON AT.task_id = task.id
-    WHERE user_id = ?`,
+    `SELECT T.id, T.title, T.description, T.earned_point
+    FROM accomplish_task AS AT
+    INNER JOIN task AS T ON AT.task_id = T.id
+    WHERE AT.user_id = ?`,
     [userId]);
 }
 

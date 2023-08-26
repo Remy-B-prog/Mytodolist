@@ -10,7 +10,6 @@ import { AuthContext } from "../context/AuthContext";
 
 export default function routes() {
   const { userToken } = useContext(AuthContext);
-  console.log(userToken);
 
   const PrivateRoute = ({ element, path }) => {
     if (userToken) {

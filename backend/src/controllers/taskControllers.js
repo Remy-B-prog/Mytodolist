@@ -15,7 +15,7 @@ const getUserAssignedTask = (req, res) => {
     const userId = getUserIdOnToken(token);
     getAllUserAssignedTask(userId)
         .then(([result]) => {
-            if (result.length > 1) {
+            if (result.length >= 1) {
                 res.status(200).json(result);
             } else {
                 res.status(404).json({ mssg: 'No task found' });
@@ -78,6 +78,7 @@ const getAllUserAccomplishTask = (req, res) => {
     const userId = getUserIdOnToken(token);
     getAccomplishTask(userId)
         .then(([result]) => {
+            console.log(result)
             if (result[0]) {
                 res.status(200).json(result);
             } else {
