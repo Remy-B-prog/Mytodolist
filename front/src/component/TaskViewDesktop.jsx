@@ -11,15 +11,17 @@ export default function TaskViewDesktop({ id, taskList,setAssignedTask,assignedT
         .post(`/api/task/validate-task/${id}`)
         .then((response) => {
             setAssignedTask(assignedTask.filter(task => task.id !== id))
+            console.log('test')
           })
         .catch((error) => {
           console.error(error);
         })
     }
 
+
   return (
         <div className='flex justify-center w-full h-full backdrop-blur-sm '>
-                <div className={`bg-pink w-3/4 h-3/4 rounded-lg mt-10  border-2 border-black ${filteredTask.category === 'Taches ménagère' ? "bg-yellow" : "bg-pink"}`} >
+                <div className={`bg-pink w-3/4 rounded-lg mt-10 md:mt-3 mb-2  border-2 border-black ${filteredTask.category === 'Taches ménagère' ? "bg-yellow" : "bg-pink"}`} >
                     <div className='flex flex-col justify-between w-full h-full pb-12 mt-12'>
                         <div className='text-center'>
                             <Title title={filteredTask.title} />

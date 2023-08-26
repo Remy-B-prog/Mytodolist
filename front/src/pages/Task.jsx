@@ -6,6 +6,7 @@ import Title from '../component/Title';
 import TaskModal from '../component/TaskModal'
 import AddTaskModal from '../component/AddTaskModal';
 import TaskViewDesktop from '../component/TaskViewDesktop';
+import Button from '../component/Button';
 export default function Task() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [assignedTask, setAssignedTask] = useState([]);
@@ -39,30 +40,33 @@ export default function Task() {
       });
   }, []);
 
+  const handlAddTaskModal = (e) => {
+    setAddTaskModal(true);
+  }
+
 
   const isMobile = windowWidth <= 1024;
 
   return (
     <>
       <TaskModal modal={modal} setModal={setModal} id={modaltaskId} taskList={[assignedTask]} assignedTask={assignedTask} setAssignedTask={setAssignedTask} />
-      <AddTaskModal modal={addTaskModal} setModal={setAddTaskModal} />
-      <div className="flex flex-col min-h-screen w-full">
+      <AddTaskModal modal={addTaskModal} setModal={setAddTaskModal} assignedTask={assignedTask} />
+      <div className="flex flex-col h-screen max-h-[100rem] w-full">
         {isMobile ? (
           <>
-            <div className='mt-10'></div>
+            <div className='mt-5'></div>
             <Title title={"Taches"} />
             <main
-              className='flex-grow overflow-y-auto overflow-hidden mb-32 md:flex md:items-center '
+              className='flex-grow overflow-y-auto overflow-hidden mb-32 md:flex'
 
             >
               {isLoading ? <div>chargement...</div> :
-                <div className='md:flex md:flex-wrap md:gap-5 md:justify-center'>
+                <div className='md:flex md:flex-wrap md:gap-5 md:justify-center md:items-center'>
                   {assignedTask.map((e) =>
-                    <div className='pt-5'>
+                    <div className='pt-5 md:w-1/3'>
                       <TaskCard key={e.id} id={e.id} title={e.title} point={e.earned_point} type={e.category} setModal={setModal} setModaltaskId={setModaltaskId} assignedTask={assignedTask} setAssignedTask={setAssignedTask} />
                     </div>
                   )}
-
                 </div>}
             </main>
             <Navbar linkLeft={"/tableau-de-bord"} logoLeft={"/image/login.svg"} linkRight={"/Add"} logoRight={"/image/add.svg"} setModalAddTask={setAddTaskModal}/>
@@ -70,15 +74,17 @@ export default function Task() {
         ) : (
           <>
             <Navbar />
-            <main className="flex-grow overflow-y-auto w-full mt-32">
-              <div>
-              </div>
+            <main className="flex-grow overflow-y-auto w-full  mt-32">
+              <div className='h-full'>
               {isLoading ? <div>chargement...</div> :
-                <div className='flex h-full'>
-                  <div className='w-1/2 h-full flex items-center'>
-                    <div className='flex flex-wrap gap-10 justify-center'>
+              <>
+                <div className='flex h-4/5'>
+                  <div className='w-1/2 h-full flex overflow-y-auto overflow-hidden'>
+                    <div className='flex flex-wrap gap-5 items-center justify-center'>
                       {assignedTask.map((e) =>
+                      <div className='w-1/3'>
                         <TaskCard key={e.id} id={e.id} title={e.title} point={e.earned_point} type={e.category} setModal={setModal} setModaltaskId={setModaltaskId} assignedTask={assignedTask} setAssignedTask={setAssignedTask} />
+                      </div>
                       )}
                     </div>
                   </div>
@@ -86,8 +92,14 @@ export default function Task() {
                     <TaskViewDesktop id={modaltaskId} taskList={[assignedTask]} assignedTask={assignedTask} setAssignedTask={setAssignedTask} />
                   </div>
                 </div>
+              <div className='flex justify-center items-center h-1/5'>
+              <div className='w-1/2 max-w-md'>
+              <Button text ='Ajouter une tache' logo="/image/cross-large.svg" handleSubmit={handlAddTaskModal} />
+              </div>
+              </div>
+              </>
               }
-
+              </div>
             </main>
           </>
         )}

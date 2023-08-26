@@ -94,23 +94,16 @@ const postUserValidateTask = (req, res) => {
     const userId = getUserIdOnToken(token);
     const taskId = req.params.id;
     getOneAccomplishTask(taskId, userId)
+    postAccomplishedTask(taskId, userId)
         .then(([result]) => {
-            if (!result[0]) {
-                postAccomplishedTask(taskId, userId)
-                    .then(([result]) => {
-                        if (result.affectedRows) {
-                            deleteAssignedTask(taskId, userId);
-                            addUserScoreToCategoryUtils(taskId, userId);
-                            checkIfUserEarnedBadge(taskId, userId);
-                            res.status(200).json({ mssg: 'Task validated successfully' });
-                        } else {
-                            res.status(500).json({ mssg: 'Internal server error' });
-                        }
-                    })
+            if (result.affectedRows) {
+                deleteAssignedTask(taskId, userId);
+                addUserScoreToCategoryUtils(taskId, userId);
+                checkIfUserEarnedBadge(taskId, userId);
+                res.status(200).json({ mssg: 'Task validated successfully' });
             } else {
-                res.status(400).json({ mssg: 'Task already validated' });
-            }
-        })
+                res.status(500).json({ mssg: 'Internal server error' });
+            }})
         .catch((error) => {
             res.status(500).json({ mssg: 'Internal server error' });
         });

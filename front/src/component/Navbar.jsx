@@ -26,9 +26,10 @@ export default function Navbar({ linkLeft, logoLeft, linkRight, logoRight, setMo
   const isMobile = windowWidth <= 1024;
 
   return (
+    <div className={`w-full ${isMobile ? 'fixed bottom-0 left-0 right-0 bg-white z-50' : 'fixed top-0 left-0 right-0 bg-white z-50 flex justify-center lg:border-t-0 lg:border-b-2 border-grey'
+  }`}>
     <nav
-      className={`w-full flex justify-between items-center ps-5 pe-5 pt-3.5 pb-3.5 border-t-2 border-grey lg:border-t-0 lg:border-b-2 ${isMobile ? 'fixed bottom-0 left-0 right-0 bg-white z-50' : 'fixed top-0 left-0 right-0 bg-white z-50'
-        }`}
+      className='w-full flex justify-between items-center ps-5 pe-5 pt-3.5 pb-3.5 border-t-2 border-grey lg:border-t-0 lg:border-b-1 max-w-[150rem]'
     >
       {isMobile ? (
         <>
@@ -66,5 +67,6 @@ export default function Navbar({ linkLeft, logoLeft, linkRight, logoRight, setMo
         </>
       )}
     </nav>
+    </div>
   );
 }

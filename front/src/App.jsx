@@ -18,8 +18,10 @@ function App() {
   return (
     <>
       <Router>
-        <div className='flex justify-center'>
+        <div className='w-full flex justify-center'>
+        <div className='flex justify-center max-w-[150rem]'>
         <Routes/>
+        </div>
         </div>
       </Router>
     </>
