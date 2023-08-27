@@ -3,10 +3,12 @@ import Navbar from '../component/Navbar';
 import Title from '../component/Title';
 import TaskCheckbox from '../component/TaskCheckbox';
 import axios from 'axios';
+import Badge from '../component/Badge';
 
 export default function Dashboard() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [taskList, setTasklist] = useState("");
+  const [badgeList, setBadgeList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -49,15 +51,24 @@ export default function Dashboard() {
             var titleB = b.title.toUpperCase();
 
             if (titleA < titleB) {
-              return -1; 
+              return -1;
             }
             if (titleA > titleB) {
-              return 1; 
+              return 1;
             }
-            return 0; 
+            return 0;
           });
           setTasklist(taskList);
-          setIsLoading(false);
+          axios
+            .get('/api/badge/')
+            .then((res) => {
+              setBadgeList(res.data);
+              setIsLoading(false);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+
         }
       })
       .catch((err) => {
@@ -65,7 +76,8 @@ export default function Dashboard() {
       });
   }, []);
 
-  console.log(taskList);
+  console.log(badgeList);
+
 
   const isMobile = windowWidth <= 1024;
 
@@ -76,15 +88,27 @@ export default function Dashboard() {
           <>
             <div className='mt-5'></div>
             <Title title={"Tableau de bord"} />
-            <main className="flex-grow overflow-y-auto w-full">
+            <main className="flex-grow overflow-y-auto w-screen">
               <div className='flex flex-wrap gap-3 justify-center mt-6 h-1/2 overflow-y-auto w-full'>
-              {isLoading ? <div>chargement...</div> : taskList.map((e) => (
-                <div className='w-5/12 h-12'>
-                  <TaskCheckbox text={e.title} state={e.state} /> 
-                </div>
-              )) }
+                {isLoading ? <div>chargement...</div> : taskList.map((e) => (
+                  <div className='w-5/12 h-12'>
+                    <TaskCheckbox key={e.id} text={e.title} state={e.state} />
+                  </div>
+                ))}
               </div>
-              
+              <div className="flex overflow-x-auto w-full ms-4 mt-12">
+                {isLoading ?
+                  <div>chargement...</div> :
+                  badgeList.map((e) => (
+                    <div className=' me-4'>
+                      <Badge color={e.color} title={e.title} />
+                    </div>
+                  )
+
+                  )
+                }
+              </div>
+
             </main>
             <Navbar linkLeft={"/taches"} logoLeft={"/image/notebook.svg"} linkRight={"/recompense"} logoRight={"/image/crown.svg"} />
           </>

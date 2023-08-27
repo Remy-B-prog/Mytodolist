@@ -113,19 +113,20 @@ CREATE TABLE badge(
     id int NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'Primary Key',
     title VARCHAR(255) NOT NULL,
     task_category_id INT NOT NULL,
+    color VARCHAR(50) NOT NULL,
     critical_score BIGINT NOT NULL,
     Foreign Key (task_category_id) REFERENCES task_category(id)
 ) COMMENT '';
 
 INSERT into `badge` VALUES 
- (1, 'netoyage endiablé',1, 100 ),
- (2, 'Yvresse du ménage', 1, 150), 
- (3, 'Fast & propre', 1, 200),
- (4, 'Administrateur de papier',2, 100),
- (5, 'Folie administrative', 2, 130),
- (6,'Expert comptable',2, 180), 
- (7, 'Maniac', 1, 500),
- (8, 'Rien ne traine', 1, 550);
+ (1, 'netoyage endiablé',1, 'green', 100 ),
+ (2, 'Yvresse du ménage', 1, 'bluesoft', 150), 
+ (3, 'Fast & propre', 1,'yellow', 200),
+ (4, 'Administrateur de papier',2, 'pink', 100),
+ (5, 'Folie administrative', 2,'greysoft', 130),
+ (6,'Expert comptable',2,'purplesoft', 180), 
+ (7, 'Maniac', 1,'purple', 500),
+ (8, 'Rien ne traine', 1,'green', 550);
 
 
 --

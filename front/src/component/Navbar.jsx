@@ -34,16 +34,16 @@ export default function Navbar({ linkLeft, logoLeft, linkRight, logoRight, setMo
       {isMobile ? (
         <>
           <Link to={linkLeft}>
-            <img src={logoLeft} alt="Logo" className="w-20 h-20 cursor-pointer" />
+            <img src={logoLeft} alt="Logo" className="w-12 h-12 cursor-pointer" />
           </Link>
           {linkRight === "/Add" 
           ? 
           <button>
-            <img src={logoRight} alt="Logo" className="w-20 h-20 cursor-pointer" onClick={handleClick} />
+            <img src={logoRight} alt="Logo" className="w-12 h-12 cursor-pointer" onClick={handleClick} />
           </button>
           :
             <Link to={linkRight}>
-              <img src={logoRight} alt="Logo" className="w-20 h-20 cursor-pointer" />
+              <img src={logoRight} alt="Logo" className="w-12 h-12 cursor-pointer" />
             </Link>}
 
         </>
