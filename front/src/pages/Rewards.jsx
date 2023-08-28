@@ -9,6 +9,7 @@ export default function Reward() {
   const [badgeList, setBadgeList] = useState([]);
   const [badgeNotValidated, setBadgeNotValidated] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [userScore, setUserScore] = useState('');
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,15 +31,19 @@ export default function Reward() {
         axios
           .get('/api/badge/no-validated').then((badge) => {
             setBadgeNotValidated(badge.data);
-            setIsLoading(false);
+            axios
+              .get('/api/score/')
+              .then((score) => {
+                setUserScore(score.data);
+                setIsLoading(false);
+              })
           });
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-  console.log(badgeNotValidated);
-
+console.log(userScore);
   const isMobile = windowWidth <= 1024;
 
   return (
@@ -63,19 +68,19 @@ export default function Reward() {
                 </div>
                 <h2 className='text-center mt-6 mb-6'>Prochaine recompenses</h2>
                 <div className='flex justify-center w-screen flex flex-wrap gap-5 ps-4 pe-4'>
-                {isLoading ?
+                  {isLoading ?
                     <div>chargement...</div> :
                     badgeNotValidated.map((e) => (
                       <>
-                      <div >
-                      <h2 className='text-md text-center'>{e.critical_score}</h2>
-                      <div>
-                        <Badge color={e.color} title={e.title} />
-                      </div>
-                      </div>
-                      
+                        <div >
+                          <h2 className='text-md text-center'>{`  ${e.category === "Taches ménagère" ? userScore[0].score : userScore[1].score} / ${e.critical_score}`}</h2>
+                          <div>
+                            <Badge color={e.color} title={e.title} />
+                          </div>
+                        </div>
+
                       </>
-                      
+
                     )
                     )
                   }

@@ -120,12 +120,12 @@ CREATE TABLE badge(
 
 INSERT into `badge` VALUES 
  (1, 'netoyage endiablé',1, 'green', 100 ),
- (2, 'Yvresse du ménage', 1, 'bluesoft', 150), 
+ (2, 'Yvresse du ménage', 1, 'green', 150), 
  (3, 'Fast & propre', 1,'yellow', 200),
  (4, 'Administrateur de papier',2, 'pink', 100),
  (5, 'Folie administrative', 2,'greysoft', 130),
- (6,'Expert comptable',2,'purplesoft', 180), 
- (7, 'Maniac', 1,'purple', 500),
+ (6,'Expert comptable',2,'yellow', 180), 
+ (7, 'Maniac', 1,'pink', 500),
  (8, 'Rien ne traine', 1,'green', 550);
 
 
