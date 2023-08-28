@@ -1,11 +1,10 @@
-const { getUserScoreInCategory } = require('../models/scoreModel');
+const { getUserScoreInCategory,getUserScore } = require('../models/scoreModel');
 
-const getUserScoreInCategoryController = (req, res) => {
+const getUserScoreController = (req, res) => {
     const token = req.header('Authorization');
     const userId = getUserIdOnToken(token);
-    const categoryId = req.params.categoryId;
 
-    getUserScoreInCategory(categoryId, userId)
+    getUserScore(userId)
         .then(([result]) => {
             if (result) {
                 res.status(200).send(result);
@@ -21,5 +20,5 @@ const getUserScoreInCategoryController = (req, res) => {
 
 
 module.exports = {
-
+    getUserScoreController,
 };
