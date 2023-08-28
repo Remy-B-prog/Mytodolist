@@ -1,5 +1,14 @@
 const database = require('../services/database');
 
+const getUserScore = (userId) => {
+    return database.query(`
+    SELECT s.id, t.category, s.core
+    FROM score AS s
+    INNER JOIN task_category AS t ON s.task_category_id = t.id
+    WHERE s.user_id = ?`, 
+    [userId]);
+}
+
 
 const addUserScoreToCategory = (scoreToAdd, categoryId, userId) => {
    return database.query(
@@ -21,4 +30,5 @@ const getUserScoreInCategory = (categoryId, userId) => {
 module.exports = {
 addUserScoreToCategory,
 getUserScoreInCategory,
+getUserScore,
 }
