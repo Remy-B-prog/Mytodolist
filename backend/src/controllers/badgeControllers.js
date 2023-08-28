@@ -39,5 +39,6 @@ const getUserNotValidatedBadge = (req, res) => {
 }
 
 module.exports = {
-    getAllUserBadge
+    getAllUserBadge,
+    getUserNotValidatedBadge,
 };
