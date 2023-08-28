@@ -24,7 +24,7 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
-    let assignedTask = [];  // Déclarer les variables en dehors des blocs .then()
+    let assignedTask = []; 
     let accomplishedTask = [];
 
     axios
