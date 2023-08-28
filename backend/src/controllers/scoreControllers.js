@@ -1,4 +1,5 @@
 const { getUserScoreInCategory,getUserScore } = require('../models/scoreModel');
+const { getUserIdOnToken } = require('../middleware/userMiddleware');
 
 const getUserScoreController = (req, res) => {
     const token = req.header('Authorization');
@@ -17,7 +18,6 @@ const getUserScoreController = (req, res) => {
             res.status(500).send("An error occurred");
         });
 }
-
 
 module.exports = {
     getUserScoreController,

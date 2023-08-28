@@ -2,7 +2,7 @@ const database = require('../services/database');
 
 const getUserScore = (userId) => {
     return database.query(`
-    SELECT s.id, t.category, s.core
+    SELECT s.id, t.category, s.score
     FROM score AS s
     INNER JOIN task_category AS t ON s.task_category_id = t.id
     WHERE s.user_id = ?`, 
