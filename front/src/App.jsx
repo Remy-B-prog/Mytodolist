@@ -15,7 +15,22 @@ function App() {
     "userToken"
   )}`;
 
-
+useEffect(() => {
+   if(Cookies.get("userToken")){
+    axios
+    .get("/api/user/reconnect")
+    .then((res) => {
+      setUserInfos({
+        userId: res.data.id,
+        userFirstName: res.data.firstname.charAt(0).toUpperCase(0) + res.data.firstname.slice(1),
+        userEmail: res.data.email,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+   }
+},[]);
 
   return (
     <>

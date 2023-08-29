@@ -30,7 +30,6 @@ const checkIfUserEarnedBadge = (taskAcomplishByUser, userId) => {
                                     const badgeEarned = BadgesNotEarned.filter(badge => userScore >= badge.critical_score);
                                     console.log(badgeEarned);
                                     if(badgeEarned[0]){
-                                        console.log(badgeEarned.length);
                                         if(badgeEarned.length > 1){
                                             badgeEarned.map((e)=>insertEarnedBadge(e.id, userId))
                                         } else {

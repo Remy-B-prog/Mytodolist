@@ -1,5 +1,9 @@
 const database = require('../services/database');
 
+const getUserById = (id) => {
+  return database.query(`SELECT firstname, email, id FROM user WHERE id = ?`, [id]);
+}
+
 const getUserByEmail = (email) => {
   return database.query(`SELECT * FROM user WHERE email = ?`, [email]);
 };
@@ -22,4 +26,5 @@ module.exports = {
   getUserByEmail,
   insert,
   updateFisrtName,
+  getUserById,
 };

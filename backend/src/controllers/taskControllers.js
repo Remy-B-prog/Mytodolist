@@ -107,8 +107,6 @@ const postUserValidateTask = (req, res) => {
         .catch((error) => {
             res.status(500).json({ mssg: 'Internal server error' });
         });
-    //Add score
-    //Check badge by category
 }
 
 const allTaskDiffAssignedTask = (req, res) => {

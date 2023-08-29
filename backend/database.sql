@@ -22,7 +22,8 @@ CREATE TABLE task_category(
     category VARCHAR(255)
 ) COMMENT '';
 
-INSERT INTO `task_category` VALUES (1, 'Taches ménagère'), (2, 'Taches administratives');
+INSERT INTO `task_category` VALUES (1, 'Tâches ménagères'), (2, 'Tâches administratives');
+
 
 --
 -- Table structure for table `task`
@@ -41,22 +42,23 @@ CREATE TABLE task(
 ) COMMENT '';
 
 INSERT INTO `task` VALUES
-(1,'Faire la vaisselle','Savonner en premier toute la vaisselle puis rincer la et ensuite secher là',1, 50),
-(2,'Laver le linge', 'regrouper toutes les affaires sales puis les mettres à la machine les sortir de suite quand la machine est terminé puis les etendre',1, 50),
-(3,'Faire les courses','Faire la liste des courses puis aller au magasin et acheter les produits de la liste',2, 70),
-(4,'Déclarer les impots','Se connecter sur le site impot.gouv puis déclarer la situation ',2, 50),
-(5,'laver le four','Acheter du décapfour faire un autocremation du four si le four en possède une puis le laver avec du décapfour',1,100),
-(6,'Laver la sale de bain', 'Ranger en premier tout les éléments qui trainent, puis laver l\'evier et la douche et enfin passer l\'aspirateur et la serpillère',1, 100 ),
-(7,'Faire le lit','Ranger les draps puis les remettre en place',1, 10),
-(8,'Faire la poussière','Prendre un chiffon et passer sur tout les meubles',1, 50),
-(9,'Faire le ménage','Passer l\'aspirateur et la serpillère',1, 100),
-(10,'Faire la cuisine','Faire la liste des courses puis acheter les produits de la liste et enfin cuisiner',1, 25),
-(11,'Faire la lessive','Regrouper tout les vêtements sales puis les mettre à la machine et enfin les étendre',1, 50),
-(12,'Faire le repassage','Ranger les vêtements puis les repasser',1, 50),
-(13,'Assurer voiture','Faire un comparatif de plusieur assureur pour trouver le meilleur prix',2, 50),
-(14,'Assurer maison','Faire un comparatif de plusieur assureur pour trouver le meilleur prix ',2, 50),
-(15,'Faire changement d''adresse','Aller a la poste faire une redirection peut permettre de temporiser le temps de faire les changement d''adresse',2, 50),
-(16,'Payer taxes foncieres','Se connecter sur le site pour payer la taxe fonciere',2, 50);
+(1, 'Faire la vaisselle', 'Savonner en premier toute la vaisselle puis la rincer et ensuite la sécher', 1, 50),
+(2, 'Laver le linge', 'Regrouper toutes les affaires sales puis les mettre à la machine, les sortir dès que la machine est terminée puis les étendre', 1, 50),
+(3, 'Faire les courses', 'Faire la liste des courses puis aller au magasin et acheter les produits de la liste', 2, 70),
+(4, 'Déclarer les impôts', 'Se connecter sur le site impot.gouv puis déclarer la situation', 2, 50),
+(5, 'Laver le four', 'Acheter du décapfour, faire un autonettoyage du four si le four en possède une, puis le laver avec du décapfour', 1, 100),
+(6, 'Laver la salle de bain', 'Ranger en premier tous les éléments qui traînent, puis laver l\'évier et la douche, et enfin passer l\'aspirateur et la serpillère', 1, 100),
+(7, 'Faire le lit', 'Ranger les draps puis les remettre en place', 1, 10),
+(8, 'Faire la poussière', 'Prendre un chiffon et passer sur tous les meubles', 1, 50),
+(9, 'Faire le ménage', 'Passer l\'aspirateur et la serpillère', 1, 100),
+(10, 'Faire la cuisine', 'Faire la liste des courses, acheter les produits de la liste et enfin cuisiner', 1, 25),
+(11, 'Faire la lessive', 'Regrouper tous les vêtements sales puis les mettre à la machine et enfin les étendre', 1, 50),
+(12, 'Faire le repassage', 'Ranger les vêtements puis les repasser', 1, 50),
+(13, 'Assurer la voiture', 'Faire un comparatif de plusieurs assureurs pour trouver le meilleur prix', 2, 50),
+(14, 'Assurer la maison', 'Faire un comparatif de plusieurs assureurs pour trouver le meilleur prix', 2, 50),
+(15, 'Faire le changement d\'adresse', 'Aller à la poste faire une redirection peut permettre de temporiser le temps de faire les changements d\'adresse', 2, 50),
+(16, 'Payer les taxes foncières', 'Se connecter sur le site pour payer la taxe foncière', 2, 50);
+
 
 -- Rémy taches ménagère 335 admin 135
 -- Maxime taches ménagère 260 admin 190
@@ -119,14 +121,14 @@ CREATE TABLE badge(
 ) COMMENT '';
 
 INSERT into `badge` VALUES 
- (1, 'netoyage endiablé',1, 'green', 100 ),
- (2, 'Yvresse du ménage', 1, 'green', 150), 
- (3, 'Fast & propre', 1,'yellow', 200),
- (4, 'Administrateur de papier',2, 'pink', 100),
- (5, 'Folie administrative', 2,'greysoft', 130),
- (6,'Expert comptable',2,'yellow', 180), 
- (7, 'Maniac', 1,'pink', 500),
- (8, 'Rien ne traine', 1,'green', 550);
+(1, 'Nettoyage endiablé', 1, 'green', 100),
+(2, 'Ivresse du ménage', 1, 'green', 150),
+(3, 'Fast & propre', 1, 'yellow', 200),
+(4, 'Administrateur de papier', 2, 'pink', 100),
+(5, 'Folie administrative', 2, 'greysoft', 130),
+(6, 'Expert comptable', 2, 'yellow', 180),
+(7, 'Maniac', 1, 'pink', 500),
+(8, 'Rien ne traine', 1, 'green', 550);
 
 
 --

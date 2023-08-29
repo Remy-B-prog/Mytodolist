@@ -31,7 +31,9 @@ export default function Reward() {
         setBadgeList(res.data);
         axios
           .get('/api/badge/no-validated').then((badge) => {
-            setBadgeNotValidated(badge.data);
+            if(badge){
+              setBadgeNotValidated(badge.data);
+            }
             axios
               .get('/api/score/')
               .then((score) => {
@@ -74,7 +76,7 @@ export default function Reward() {
                     badgeNotValidated.map((e) => (
                       <>
                         <div >
-                          <h2 className='text-md text-center'>{`  ${e.category === "Taches ménagère" ? userScore[0].score : userScore[1].score} / ${e.critical_score}`}</h2>
+                          <h2 className='text-md text-center'>{`  ${e.category === "Taches ménagères" ? userScore[0].score : userScore[1].score} / ${e.critical_score}`}</h2>
                           <div>
                             <Badge color={e.color} title={e.title} />
                           </div>
@@ -94,7 +96,7 @@ export default function Reward() {
             <>
               <Navbar />
               <main className="flex justify-center w-full">
-                <div className='w-2/3 lg:w-3/5 '>
+                <div className='w-2/3 lg:w-3/5 mt-6 mb-6 '>
                   <h2 className='text-center mb-6 mt-6'>Obtenu</h2>
                   <div className='flex justify-center flex-wrap gap-6 ps-4 pe-4'>
                     {isLoading ?
@@ -116,7 +118,7 @@ export default function Reward() {
                       badgeNotValidated.map((e) => (
                         <>
                           <div key = {e.id}>
-                            <h2 className='text-md text-center'>{`${e.category === "Taches ménagère" ? userScore[0].score : userScore[1].score} / ${e.critical_score}`}</h2>
+                            <h2 className='text-md text-center'>{`${e.category === "Taches ménagères" ? userScore[0].score : userScore[1].score} / ${e.critical_score}`}</h2>
                             <div>
                               <Badge color={e.color} title={e.title} />
                             </div>

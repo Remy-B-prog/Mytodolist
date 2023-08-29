@@ -7,7 +7,9 @@ import TaskModal from '../component/TaskModal'
 import AddTaskModal from '../component/AddTaskModal';
 import TaskViewDesktop from '../component/TaskViewDesktop';
 import Button from '../component/Button';
+
 export default function Task() {
+
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [assignedTask, setAssignedTask] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -45,8 +47,6 @@ export default function Task() {
   useEffect(() => {
     setIsLoading(true);
     setIsLoading(false);
-
-
   }, [assignedTask])
 
   const handlAddTaskModal = (e) => {
@@ -72,7 +72,7 @@ export default function Task() {
                 {isLoading ? <div> </div> :
                   <div className='flex flex-col items-center md:flex-row md:flex md:flex-wrap md:gap-5 md:justify-center'  >
                     {
-                      assignedTask.length === 0 ? <div className='text-center'>Vous n'avez pas de tache assignée</div> :
+                      assignedTask.length === 0 ? <p className='text-center'>Vous n'avez pas de tâche assignée.</p> :
                         assignedTask.map((e) =>
                           <div key={e.id} className='pt-5 md:w-1/3 w-4/5'>
                             <TaskCard id={e.id} title={e.title} point={e.earned_point} type={e.category} setModal={setModal} setModaltaskId={setModaltaskId} assignedTask={assignedTask} setAssignedTask={setAssignedTask} />
@@ -98,7 +98,7 @@ export default function Task() {
                         <div className='w-full'>
                           <div className='flex flex-wrap gap-5 items-center justify-center'>
                             {
-                              assignedTask.length === 0 ? <div className='text-center'>Vous n'avez pas de tache assignée</div> :
+                              assignedTask.length === 0 ? <p className='text-center'>Vous n'avez pas de tache assignée</p> :
                                 assignedTask.map((e) =>
                                   <div className='w-1/3' key={e.id}>
                                     <TaskCard id={e.id} title={e.title} point={e.earned_point} type={e.category} setModal={setModal} setModaltaskId={setModaltaskId} assignedTask={assignedTask} setAssignedTask={setAssignedTask} />

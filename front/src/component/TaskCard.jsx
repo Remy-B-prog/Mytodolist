@@ -25,12 +25,12 @@ export default function TaskCard({ id, title, point, type, setModal, setModaltas
     return (
         <div className='flex justify-center'>
             <div className='flex flex-col max-w-sm justify-center items-center h-full w-full'>
-                <div className={`h-12 flex items-center w-full flex items-center justify-center rounded-t-lg ${type=== 'Taches ménagère' ? "bg-yellow" : "bg-pink"}`}>
+                <div className={`h-12 flex items-center w-full flex items-center justify-center rounded-t-lg ${type=== 'Taches ménagères' ? "bg-yellow" : "bg-pink"}`}>
                     <h2 className='truncate ... ps-2 pe-2'>{title}</h2>
                 </div>
                 <div className='flex w-full'>
                     <div className='flex w-full justify-between'>
-                        <button className={`flex justify-around ps-10 pe-10 w-full rounded-bl-lg ${type=== 'Taches ménagère' ? "bg-yellowflash" : "bg-pinkflash"}`}
+                        <button className={`flex justify-around ps-10 pe-10 w-full rounded-bl-lg ${type=== 'Taches ménagères' ? "bg-yellowflash" : "bg-pinkflash"}`}
                         onClick={handlValidateTask}
                         >
                             <img src="/image/validation.svg" alt="validation" />

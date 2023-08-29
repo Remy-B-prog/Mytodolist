@@ -24,21 +24,20 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
-    let assignedTask = []; 
+    let assignedTask = [];
     let accomplishedTask = [];
 
     axios
       .get('/api/task/assigned')
       .then((res) => {
         if (res.data) {
-          assignedTask = res.data; // Assigner les données aux variables déclarées
+          assignedTask = res.data;
         }
-        return axios.get('/api/task/accomplished'); // Renvoyer la promesse pour le chaînage
+        return axios.get('/api/task/accomplished');
       })
       .then((res) => {
         if (res.data) {
-          accomplishedTask = res.data; // Assigner les données aux variables déclarées
-
+          accomplishedTask = res.data;
           const taskList = [];
           for (const task of assignedTask) {
             taskList.push({ ...task, state: 'assigned task', uniqueId: taskList.length + 1 });
@@ -58,6 +57,7 @@ export default function Dashboard() {
             }
             return 0;
           });
+          
           setTasklist(taskList);
           axios
             .get('/api/badge/')
@@ -67,16 +67,20 @@ export default function Dashboard() {
             })
             .catch((err) => {
               console.log(err);
+
             });
 
         }
       })
       .catch((err) => {
         console.log(err);
+        setIsLoading(false);
       });
   }, []);
 
   const isMobile = windowWidth <= 1024;
+  console.log(taskList.length);
+  console.log(taskList);
 
   return (
     <>
@@ -88,7 +92,7 @@ export default function Dashboard() {
               <div className='flex flex-wrap gap-3 md:gap-6 justify-center mt-6'>
                 {isLoading ? <div>chargement...</div> : taskList.map((e) => (
                   <div key={e.id} className='w-5/12 h-12 md:w-1/3 md:h-16 '>
-                    <TaskCheckbox  text={e.title} state={e.state} />
+                    <TaskCheckbox text={e.title} state={e.state} />
                   </div>
                 ))}
               </div>
@@ -96,7 +100,7 @@ export default function Dashboard() {
                 {isLoading ?
                   <div>chargement...</div> :
                   badgeList.map((e) => (
-                    <div key= {e.id} className=' me-4 '>
+                    <div key={e.id} className=' me-4 '>
                       <Badge color={e.color} title={e.title} />
                     </div>
                   )
@@ -110,27 +114,34 @@ export default function Dashboard() {
           <>
             <Navbar />
             <main className=" flex w-full h-screen ">
-              <div className='w-1/2 h-full flex items-start pt-10'>
-              <div className='flex flex-wrap gap-3 md:gap-6 mt-20 mb-10 lg:gap-3 justify-center items-start'>
-                {isLoading ? <div> </div> : taskList.map((e) => (
-                  <div key={e.id}  className='w-5/12 md:w-1/3 md:h-12'>
-                    <TaskCheckbox  text={e.title} state={e.state} />
-                  </div>
-                ))}
+              <div className='w-1/2 h-full flex items-center pt-10'>
+                <div className='flex flex-wrap gap-3 md:gap-6 mt-20 mb-10 lg:gap-3 justify-center items-start'>
+                  {isLoading ?
+                    <div> </div> :
+                    taskList.length ?
+                      taskList.map((e) => (
+                        <div key={e.id} className='w-5/12 md:w-1/3 md:h-12'>
+                          <TaskCheckbox text={e.title} state={e.state} />
+                        </div>
+                      ))
+                      : <p className='text-lg text-center'> Vous n'avez aucune taches en cours vous pouvez en ajouter dans la page Taches </p>
+                  }
+                </div>
               </div>
-              </div>
-              <div className='w-1/2 h-full flex items-start pt-10'>
-              <div className='flex flex-wrap gap-3 md:gap-6 mt-20 mb-10 lg:gap-10 justify-center items-start w-4/5'>
-                {isLoading ?
-                  <div> </div> :
-                  badgeList.map((e) => (
-                    <div key = {e.id} className=' me-4 flex items-center'>
-                      <Badge color={e.color} title={e.title} />
-                    </div>
-                  )
-                  )
-                }
-              </div>
+              <div className='w-1/2 h-full flex items-center justify-center pt-10'>
+                <div className='flex flex-wrap gap-3 md:gap-6 mt-20 mb-10 lg:gap-10 justify-center items-start w-4/5'>
+                  {isLoading ?
+                    <div> </div> :
+                    badgeList.length ?
+                      badgeList.map((e) => (
+                        <div key={e.id} className=' me-4 flex items-center'>
+                          <Badge color={e.color} title={e.title} />
+                        </div>
+                      )
+                      ) :
+                      <p className='text-lg text-center'>Aucun badge obtenu, réalisez des taches pour gagner des points et ainsi débloquer des badges </p>
+                  }
+                </div>
               </div>
             </main>
           </>

@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar({ linkLeft, logoLeft, linkRight, logoRight, setModalAddTask }) {
+  const navigate = useNavigate();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const { userInfos } = useContext(AuthContext);
+  const userFirstName = userInfos.userFirstName;
+
 
   const handleClick = () => {
     setModalAddTask(true);
   }
-
 
   useEffect(() => {
     const handleResize = () => {
@@ -49,10 +52,12 @@ export default function Navbar({ linkLeft, logoLeft, linkRight, logoRight, setMo
         </>
       ) : (
         <>
-          <Link to="/tableau-de-bord">
-            <div className='flex flex-col items-center ms-2'>
+          <Link to="/connexion">
+            <div 
+            className='flex flex-col items-center ms-2'
+            >
               <img src="/image/login.svg" alt="Logo" className="w-10 h-10 cursor-pointer" />
-              <p className='text-base' >Rémy</p>
+              <p className='text-base' >{userFirstName}</p>
             </div>
           </Link>
           <Link to="/taches">
