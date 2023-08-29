@@ -76,9 +76,6 @@ export default function Dashboard() {
       });
   }, []);
 
-  console.log(badgeList);
-
-
   const isMobile = windowWidth <= 1024;
 
   return (
@@ -114,20 +111,20 @@ export default function Dashboard() {
             <Navbar />
             <main className=" flex flex-grow w-full ">
               <div className='w-1/2 h-full flex items-center pt-10'>
-              <div className='flex flex-wrap gap-3 md:gap-6 h-5/6 lg:gap-3 justify-center items-center pb-12 overflow-y-auto '>
+              <div className='flex flex-wrap gap-3 md:gap-6 mt-20 mb-10 lg:gap-3 justify-center items-start'>
                 {isLoading ? <div>chargement...</div> : taskList.map((e) => (
-                  <div className='w-5/12 md:w-1/3 md:h-12'>
-                    <TaskCheckbox key={e.id} text={e.title} state={e.state} />
+                  <div key={e.id}  className='w-5/12 md:w-1/3 md:h-12'>
+                    <TaskCheckbox  text={e.title} state={e.state} />
                   </div>
                 ))}
               </div>
               </div>
               <div className='w-1/2 h-full flex items-center pt-10'>
-              <div className="flex flex-wrap lg:gap-6 justify-center ms-4 mt-28 h-5/6">
+              <div className="flex flex-wrap lg:gap-6 justify-center ms-4 h-5/6">
                 {isLoading ?
                   <div>chargement...</div> :
                   badgeList.map((e) => (
-                    <div className=' me-4'>
+                    <div key = {e.id} className=' me-4'>
                       <Badge color={e.color} title={e.title} />
                     </div>
                   )
