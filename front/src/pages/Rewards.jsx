@@ -76,7 +76,7 @@ export default function Reward() {
                     badgeNotValidated.map((e) => (
                       <>
                         <div >
-                          <h2 className='text-md text-center'>{`  ${e.category === "Taches ménagères" ? userScore[0].score : userScore[1].score} / ${e.critical_score}`}</h2>
+                          <h2 className='text-md text-center'>{`  ${e.category === "Tâches ménagères" ? userScore[0].score : userScore[1].score} / ${e.critical_score}`}</h2>
                           <div>
                             <Badge color={e.color} title={e.title} />
                           </div>
@@ -118,7 +118,7 @@ export default function Reward() {
                       badgeNotValidated.map((e) => (
                         <>
                           <div key = {e.id}>
-                            <h2 className='text-md text-center'>{`${e.category === "Taches ménagères" ? userScore[0].score : userScore[1].score} / ${e.critical_score}`}</h2>
+                            <h2 className='text-md text-center'>{`${e.category === "Tâches ménagères" ? userScore[0].score : userScore[1].score} / ${e.critical_score}`}</h2>
                             <div>
                               <Badge color={e.color} title={e.title} />
                             </div>

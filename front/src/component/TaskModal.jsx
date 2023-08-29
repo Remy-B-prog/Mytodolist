@@ -23,7 +23,7 @@ export default function TaskModal({ modal, setModal, id, taskList, setAssignedTa
     if (modal && window.innerWidth <= 1024) {
         return (
             <div className='flex justify-center w-full h-full backdrop-blur-sm fixed'>
-                <div className={`bg-pink w-3/4 h-3/4 md:w-3/5 md:h-3/5 rounded-lg mt-10 md:mt-32 border-2 border-black ${filteredTask.category === 'Taches ménagères' ? "bg-yellow" : "bg-pink"}`} >
+                <div className={`bg-pink w-3/4 h-3/4 md:w-3/5 md:h-3/5 rounded-lg mt-10 md:mt-32 border-2 border-black ${filteredTask.category === 'Tâches ménagères' ? "bg-yellow" : "bg-pink"}`} >
                     <div
                         className='flex justify-end mr-5 mt-5 '
                         onClick={handleClick}>
@@ -36,7 +36,7 @@ export default function TaskModal({ modal, setModal, id, taskList, setAssignedTa
                         <div className='ms-5 me-5 mt-5 overflow-hidden max-h-60 overflow-y-auto overflow-hidden'>
                             <p className='text-lg md:text-2xl w-full text-center'>{filteredTask.description}</p>
                         </div>
-                        <button className={`flex justify-around items-center h-20 ps-5 pe-5 w-full rounded-bl-lg rounded-br-lg ${filteredTask.category === 'Taches ménagères' ? "bg-yellowflash" : "bg-pinkflash"}`}
+                        <button className={`flex justify-around items-center h-20 ps-5 pe-5 w-full rounded-bl-lg rounded-br-lg ${filteredTask.category === 'Tâches ménagères' ? "bg-yellowflash" : "bg-pinkflash"}`}
                         onClick={handlValidateTask}>
                             <img src="/image/validation.svg" alt="validation" className='w-10 h-10'/>
                             <p className='text-2xl'>{filteredTask.earned_point} pts</p>
