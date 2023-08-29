@@ -13,7 +13,6 @@ export default function input({ title, value, type, seter, placeholder }) {
         type={type}   
         value={value}
         onChange={(e) => seter(e.target.value)}
-        autoComplete={type}
         required
         placeholder={placeholder}
       />

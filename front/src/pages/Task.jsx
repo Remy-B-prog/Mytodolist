@@ -36,9 +36,18 @@ export default function Task() {
         setIsLoading(false);
       })
       .catch((err) => {
+        setAssignedTask([])
+        setIsLoading(false);
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    setIsLoading(true);
+    setIsLoading(false);
+
+
+  }, [assignedTask])
 
   const handlAddTaskModal = (e) => {
     setAddTaskModal(true);
@@ -60,13 +69,17 @@ export default function Task() {
               className='items-center mb-40 h-full md:flex'
             >
               <div className='md:w-full'>
-                {isLoading ? <div>chargement...</div> :
+                {isLoading ? <div> </div> :
                   <div className='flex flex-col items-center md:flex-row md:flex md:flex-wrap md:gap-5 md:justify-center'  >
-                    {assignedTask.map((e) =>
-                      <div key={e.id} className='pt-5 md:w-1/3 w-4/5'>
-                        <TaskCard id={e.id} title={e.title} point={e.earned_point} type={e.category} setModal={setModal} setModaltaskId={setModaltaskId} assignedTask={assignedTask} setAssignedTask={setAssignedTask} />
-                      </div>
-                    )}
+                    {
+                      assignedTask.length === 0 ? <div className='text-center'>Vous n'avez pas de tache assignée</div> :
+                        assignedTask.map((e) =>
+                          <div key={e.id} className='pt-5 md:w-1/3 w-4/5'>
+                            <TaskCard id={e.id} title={e.title} point={e.earned_point} type={e.category} setModal={setModal} setModaltaskId={setModaltaskId} assignedTask={assignedTask} setAssignedTask={setAssignedTask} />
+                          </div>
+                        )
+
+                    }
                   </div>
                 }
               </div>
@@ -78,22 +91,27 @@ export default function Task() {
             <Navbar />
             <main className="flex-grow overflow-y-auto w-full  mt-32">
               <div className='h-full'>
-                {isLoading ? <div>chargement...</div> :
+                {isLoading ? <div> </div> :
                   <>
                     <div className='flex h-4/5'>
                       <div className='w-1/2 h-full flex items-center overflow-y-auto overflow-hidden'>
                         <div className='w-full'>
                           <div className='flex flex-wrap gap-5 items-center justify-center'>
-                            {assignedTask.map((e) =>
-                              <div className='w-1/3' key={e.id}>
-                                <TaskCard id={e.id} title={e.title} point={e.earned_point} type={e.category} setModal={setModal} setModaltaskId={setModaltaskId} assignedTask={assignedTask} setAssignedTask={setAssignedTask} />
-                              </div>
-                            )}
+                            {
+                              assignedTask.length === 0 ? <div className='text-center'>Vous n'avez pas de tache assignée</div> :
+                                assignedTask.map((e) =>
+                                  <div className='w-1/3' key={e.id}>
+                                    <TaskCard id={e.id} title={e.title} point={e.earned_point} type={e.category} setModal={setModal} setModaltaskId={setModaltaskId} assignedTask={assignedTask} setAssignedTask={setAssignedTask} />
+                                  </div>
+                                )}
                           </div>
                         </div>
                       </div>
                       <div className='w-1/2'>
-                        <TaskViewDesktop id={modaltaskId} taskList={[assignedTask]} assignedTask={assignedTask} setAssignedTask={setAssignedTask} />
+                        {
+                          assignedTask.length === 0 ? <div className='text-center'></div> :
+                          <TaskViewDesktop id={modaltaskId} assignedTask={[assignedTask]} setAssignedTask={setAssignedTask} />
+                        }
                       </div>
                     </div>
                     <div className='flex justify-center items-center h-1/5'>

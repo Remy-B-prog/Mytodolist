@@ -22,15 +22,21 @@ const checkIfUserEarnedBadge = (taskAcomplishByUser, userId) => {
                     const allBadge = result;
                     getAllBadgeUserInCategory(userId, categoryId)
                         .then(([result]) => {
-                            userBadge = result;
+                           const userBadge = result;
                             const BadgesNotEarned = allBadge.filter(badge => !userBadge.some(userBadge => userBadge.id === badge.id));
                             getUserScoreInCategory(categoryId, userId)
                                 .then(([result]) => {
                                     const userScore = result[0].score;
                                     const badgeEarned = BadgesNotEarned.filter(badge => userScore >= badge.critical_score);
+                                    console.log(badgeEarned);
                                     if(badgeEarned[0]){
-                                        const badgeId = badgeEarned[0].id;
-                                        insertEarnedBadge(badgeId, userId);
+                                        console.log(badgeEarned.length);
+                                        if(badgeEarned.length > 1){
+                                            badgeEarned.map((e)=>insertEarnedBadge(e.id, userId))
+                                        } else {
+                                            const badgeId = badgeEarned[0].id;
+                                            insertEarnedBadge(badgeId, userId);
+                                        }
                                     }
                                 })
                         });

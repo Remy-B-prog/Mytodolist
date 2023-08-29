@@ -87,8 +87,8 @@ export default function Dashboard() {
             <main className="flex-grow overflow-y-auto w-screen mb-26">
               <div className='flex flex-wrap gap-3 md:gap-6 justify-center mt-6'>
                 {isLoading ? <div>chargement...</div> : taskList.map((e) => (
-                  <div className='w-5/12 h-12 md:w-1/3 md:h-16'>
-                    <TaskCheckbox key={e.id} text={e.title} state={e.state} />
+                  <div key={e.id} className='w-5/12 h-12 md:w-1/3 md:h-16 '>
+                    <TaskCheckbox  text={e.title} state={e.state} />
                   </div>
                 ))}
               </div>
@@ -96,7 +96,7 @@ export default function Dashboard() {
                 {isLoading ?
                   <div>chargement...</div> :
                   badgeList.map((e) => (
-                    <div className=' me-4'>
+                    <div key= {e.id} className=' me-4 '>
                       <Badge color={e.color} title={e.title} />
                     </div>
                   )
@@ -109,22 +109,22 @@ export default function Dashboard() {
         ) : (
           <>
             <Navbar />
-            <main className=" flex flex-grow w-full ">
-              <div className='w-1/2 h-full flex items-center pt-10'>
+            <main className=" flex w-full h-screen ">
+              <div className='w-1/2 h-full flex items-start pt-10'>
               <div className='flex flex-wrap gap-3 md:gap-6 mt-20 mb-10 lg:gap-3 justify-center items-start'>
-                {isLoading ? <div>chargement...</div> : taskList.map((e) => (
+                {isLoading ? <div> </div> : taskList.map((e) => (
                   <div key={e.id}  className='w-5/12 md:w-1/3 md:h-12'>
                     <TaskCheckbox  text={e.title} state={e.state} />
                   </div>
                 ))}
               </div>
               </div>
-              <div className='w-1/2 h-full flex items-center pt-10'>
-              <div className="flex flex-wrap lg:gap-6 justify-center ms-4 h-5/6">
+              <div className='w-1/2 h-full flex items-start pt-10'>
+              <div className='flex flex-wrap gap-3 md:gap-6 mt-20 mb-10 lg:gap-10 justify-center items-start w-4/5'>
                 {isLoading ?
-                  <div>chargement...</div> :
+                  <div> </div> :
                   badgeList.map((e) => (
-                    <div key = {e.id} className=' me-4'>
+                    <div key = {e.id} className=' me-4 flex items-center'>
                       <Badge color={e.color} title={e.title} />
                     </div>
                   )

@@ -78,7 +78,6 @@ const getAllUserAccomplishTask = (req, res) => {
     const userId = getUserIdOnToken(token);
     getAccomplishTask(userId)
         .then(([result]) => {
-            console.log(result)
             if (result[0]) {
                 res.status(200).json(result);
             } else {
@@ -122,8 +121,6 @@ const allTaskDiffAssignedTask = (req, res) => {
                 getAllUserAssignedTask(userId)
                 .then(([result]) => {
                     const userAssignedTask = result;
-                    console.log(userAssignedTask);
-                    console.log(userAssignedTask.id);
                     const userTaskDiffAssignedTask = allTask.filter(task => !userAssignedTask.some(userAssignedTask => userAssignedTask.id === task.id));
                     res.status(200).json(userTaskDiffAssignedTask);
                 });

@@ -9,11 +9,13 @@ import { AuthContext } from "./context/AuthContext";
 
 function App() {
   const backUrl = import.meta.env.VITE_BACKEND_URL;
-  const { setUserInfos } = useContext(AuthContext);
+  const { setUserInfos, userInfos } = useContext(AuthContext);
   axios.defaults.baseURL = backUrl;
   axios.defaults.headers.common.Authorization = `Bearer ${Cookies.get(
     "userToken"
   )}`;
+
+
 
   return (
     <>
